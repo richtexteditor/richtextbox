@@ -1,0 +1,7 @@
+# Override GitHub Linguist language detection
+# Mark vendored JS/CSS so they don't count toward language stats
+RichTextBox.WebSite/wwwroot/lib/** linguist-vendored
+RichTextBox.WebSite/wwwroot/js/** linguist-vendored
+RichTextBox.WebSite/wwwroot/_content/** linguist-vendored
+*.js linguist-vendored
+*.css linguist-vendored
