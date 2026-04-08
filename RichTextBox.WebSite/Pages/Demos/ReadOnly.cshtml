@@ -1,0 +1,43 @@
+@page
+@{
+    ViewData["Title"] = "Read-Only Mode";
+    ViewData["DemoNumber"] = 10;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Read-Only Mode</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Display HTML content in a read-only editor. Users can view and select text but cannot modify the content. Ideal for previewing submitted content.</p>
+
+                    <richtextbox
+                        id="readOnlyEditor"
+                        name="readOnlyEditor"
+                        read-only="true"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="300px"
+                        html="<h2>Company Policy: Remote Work Guidelines</h2><p><em>Effective Date: January 1, 2026 &mdash; Human Resources Department</em></p><h3>1. Eligibility</h3><p>All full-time employees who have completed their probationary period are eligible to request remote work arrangements. Approval is subject to manager review and departmental needs.</p><h3>2. Core Hours</h3><p>Remote employees must be available during <strong>core business hours (10:00 AM &ndash; 3:00 PM)</strong> in their local time zone. Flexible scheduling outside core hours is permitted with manager approval.</p><h3>3. Equipment &amp; Security</h3><ul><li>The company provides a laptop, monitor, and headset for remote workstations</li><li>All work must be performed on company-approved devices with full-disk encryption enabled</li><li>Employees must use the corporate VPN when accessing internal systems</li></ul><h3>4. Communication</h3><p>Teams are expected to hold a daily stand-up meeting and maintain availability on the company messaging platform. Response times during core hours should not exceed <u>30 minutes</u> for direct messages.</p><p><strong>This policy is subject to revision. Contact HR for questions.</strong></p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Read-only mode preserves all formatting and styling. The toolbar is hidden and the content area is not editable.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="readOnlyEditor"
+    read-only="true"
+    toolbar="full"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

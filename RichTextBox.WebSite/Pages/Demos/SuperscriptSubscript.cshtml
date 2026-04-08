@@ -1,0 +1,34 @@
+@page
+@{
+    ViewData["Title"] = "Superscript & Subscript";
+    ViewData["DemoNumber"] = 18;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Superscript &amp; Subscript</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Toggle superscript and subscript formatting on selected text for mathematical notation and footnotes.</p>
+
+                    <richtextbox
+                        id="supSubEditor"
+                        name="supSubEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="300px"
+                        html="<p>Water is H<sub>2</sub>O. Einstein's famous equation is E=mc<sup>2</sup>. Use superscript for exponents and subscript for chemical formulas.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="supSubEditor"
+    toolbar="full"
+    height="300px"
+    html="&lt;p&gt;Water is H&lt;sub&gt;2&lt;/sub&gt;O. E=mc&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

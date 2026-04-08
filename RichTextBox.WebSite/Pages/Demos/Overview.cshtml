@@ -1,0 +1,84 @@
+@page
+@{
+    ViewData["Title"] = "Feature Overview";
+    ViewData["DemoNumber"] = 1;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Feature Overview</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        RichTextBox is a professional WYSIWYG editor Tag Helper for ASP.NET Core that delivers
+                        a complete content-authoring experience out of the box. With a single tag, you get rich-text
+                        formatting, tables, image management, templates, and more &mdash; ready for production forms,
+                        CMS pages, and email composers.
+                    </p>
+
+                    <div class="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4 transition-shadow hover:shadow-md">
+                            <h3 class="mb-1 font-['Sora'] text-sm font-semibold text-slate-900">WYSIWYG Editing</h3>
+                            <p class="mb-0 text-sm text-slate-500">Full rich-text editing with headings, inline formatting, lists, tables, links, and embedded media.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4 transition-shadow hover:shadow-md">
+                            <h3 class="mb-1 font-['Sora'] text-sm font-semibold text-slate-900">Image Gallery</h3>
+                            <p class="mb-0 text-sm text-slate-500">Browse server folders, drag-and-drop upload, resize inline, and insert images from the built-in gallery.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4 transition-shadow hover:shadow-md">
+                            <h3 class="mb-1 font-['Sora'] text-sm font-semibold text-slate-900">Content Templates</h3>
+                            <p class="mb-0 text-sm text-slate-500">Insert professionally designed starter blocks &mdash; invoices, newsletters, layouts &mdash; with one click.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4 transition-shadow hover:shadow-md">
+                            <h3 class="mb-1 font-['Sora'] text-sm font-semibold text-slate-900">Context Menu</h3>
+                            <p class="mb-0 text-sm text-slate-500">Right-click any table, image, or link for quick contextual actions like merge, split, and edit.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4 transition-shadow hover:shadow-md">
+                            <h3 class="mb-1 font-['Sora'] text-sm font-semibold text-slate-900">Autosave &amp; Drafts</h3>
+                            <p class="mb-0 text-sm text-slate-500">Automatically persist drafts to local storage so users never lose work, even after a page refresh.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4 transition-shadow hover:shadow-md">
+                            <h3 class="mb-1 font-['Sora'] text-sm font-semibold text-slate-900">Multiple Skins</h3>
+                            <p class="mb-0 text-sm text-slate-500">Ship with the default or Office 2007 Blue skin, or customize the look to match your application brand.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="mb-3 font-['Sora'] text-base font-semibold text-slate-900">Try the Full Editor</h3>
+                    <p class="mb-4 text-sm text-slate-500">
+                        The editor below is loaded with the <strong>full</strong> toolbar and realistic sample content.
+                        Edit the text, insert images, modify the table, or switch to source-code view to inspect the HTML.
+                    </p>
+
+                    <richtextbox
+                        id="OverviewEditor"
+                        name="OverviewEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="500px"
+                        html="<h2>Horizon Product Launch &mdash; Q3 2026</h2><p>We are excited to announce <strong>Horizon 3.0</strong>, the next major release of our flagship platform. This update brings <em>significant performance improvements</em>, a redesigned dashboard, and powerful new integrations that our customers have been requesting.</p><blockquote><p>&ldquo;Horizon 3.0 represents the biggest leap forward in our product&rsquo;s history. Every feature was shaped by direct customer feedback.&rdquo;<br />&mdash; <strong>Sarah Chen</strong>, VP of Product</p></blockquote><h3>Release Schedule</h3><table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;width:100%;'><thead><tr style='background-color:#f1f5f9;'><th style='text-align:left;padding:8px;'>Milestone</th><th style='text-align:left;padding:8px;'>Date</th><th style='text-align:left;padding:8px;'>Status</th></tr></thead><tbody><tr><td style='padding:8px;'>Beta Release</td><td style='padding:8px;'>June 15, 2026</td><td style='padding:8px;'><span style='color:#16a34a;font-weight:bold;'>Complete</span></td></tr><tr><td style='padding:8px;'>Release Candidate</td><td style='padding:8px;'>August 1, 2026</td><td style='padding:8px;'><span style='color:#ca8a04;font-weight:bold;'>In Progress</span></td></tr><tr><td style='padding:8px;'>General Availability</td><td style='padding:8px;'>September 10, 2026</td><td style='padding:8px;'><span style='color:#64748b;'>Upcoming</span></td></tr><tr><td style='padding:8px;'>Enterprise Rollout</td><td style='padding:8px;'>October 1, 2026</td><td style='padding:8px;'><span style='color:#64748b;'>Upcoming</span></td></tr></tbody></table><h3>Key Features</h3><ul><li><strong>Redesigned Dashboard</strong> &mdash; a cleaner layout with customizable widgets and real-time analytics.</li><li><strong>API v3</strong> &mdash; RESTful endpoints with GraphQL support, rate limiting, and webhook notifications.</li><li><strong>Team Workspaces</strong> &mdash; shared environments with role-based permissions and audit logging.</li><li><strong>Performance Engine</strong> &mdash; up to 40% faster load times thanks to a new caching layer.</li><li><strong>Accessibility (WCAG 2.2)</strong> &mdash; full keyboard navigation and screen-reader compatibility.</li></ul><hr /><p>For the full release notes and migration guide, visit the <a href='https://example.com/horizon'>Horizon Documentation Portal</a>. Questions? Reach out to the product team at <a href='mailto:horizon@example.com'>horizon&commat;example.com</a>.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">
+                                This demo uses the <code>full</code> toolbar preset, which includes every built-in button.
+                                For most projects you will want the <code>default</code> toolbar or a
+                                custom configuration. Explore the <strong>Toolbar</strong> demos in the sidebar to see all available presets and learn how to build your own.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="OverviewEditor"
+    toolbar="full"
+    width="100%"
+    height="500px"
+    html="&lt;h2&gt;Your content here...&lt;/h2&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

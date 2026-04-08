@@ -1,0 +1,34 @@
+@page
+@{
+    ViewData["Title"] = "Remove Link";
+    ViewData["DemoNumber"] = 32;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Remove Link</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Remove a hyperlink while keeping the text content. Place cursor inside a link and click the unlink button.</p>
+
+                    <richtextbox
+                        id="unlinkEditor"
+                        name="unlinkEditor"
+                        toolbar="{insertlink,unlink}|{bold,italic}|{undo,redo}"
+                        width="100%"
+                        height="300px"
+                        html="<p>Place your cursor inside <a href='https://example.com'>this hyperlink</a> and click the Unlink toolbar button to remove the link while keeping the text.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="unlinkEditor"
+    toolbar="{insertlink,unlink}|{bold,italic}|{undo,redo}"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

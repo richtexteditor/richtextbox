@@ -1,0 +1,34 @@
+@page
+@{
+    ViewData["Title"] = "Find & Replace";
+    ViewData["DemoNumber"] = 94;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Find &amp; Replace</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Use the built-in find and replace dialog to search for text and optionally replace it throughout the content.</p>
+
+                    <richtextbox
+                        id="findReplaceEditor"
+                        name="findReplaceEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="300px"
+                        html="<p>This editor has the Find button in the toolbar. Click it to open the Find and Replace dialog.</p><p>Try searching for the word 'editor' in this content. The dialog supports case-sensitive matching and replace all.</p><p>The editor also highlights all matches as you type in the search field.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="findReplaceEditor"
+    toolbar="full"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

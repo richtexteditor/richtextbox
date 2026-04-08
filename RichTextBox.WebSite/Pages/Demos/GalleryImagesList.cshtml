@@ -1,0 +1,50 @@
+@page
+@{
+    ViewData["Title"] = "Gallery Images List";
+    ViewData["DemoNumber"] = 79;
+    var galleryImagesJson = System.Text.Json.JsonSerializer.Serialize(new[]
+    {
+        new { url = "/images/microsoft.svg", text = "Microsoft Logo" },
+        new { url = "/images/Intel.svg", text = "Intel Logo" },
+        new { url = "/images/sample-photo.jpg", text = "Sample Photo" }
+    });
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Gallery Images List</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Pre-populate the image gallery with a list of images and descriptions using gallery-images-json.</p>
+
+                    <richtextbox
+                        id="galleryImagesEditor"
+                        name="galleryImagesEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        gallery-images-json="@galleryImagesJson"
+                        html="<p>Open the image gallery to see the pre-populated images with descriptions.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>@@{
+    var galleryImagesJson = System.Text.Json.JsonSerializer.Serialize(new[]
+    {
+        new { url = "/images/microsoft.svg", text = "Microsoft Logo" },
+        new { url = "/images/Intel.svg", text = "Intel Logo" },
+        new { url = "/images/sample-photo.jpg", text = "Sample Photo" }
+    });
+}
+
+&lt;richtextbox
+    name="galleryImagesEditor"
+    toolbar="default"
+    height="300px"
+    gallery-images-json="@@galleryImagesJson" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

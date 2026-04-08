@@ -1,0 +1,33 @@
+@page
+@{
+    ViewData["Title"] = "Office 2007 Blue Skin";
+    ViewData["DemoNumber"] = 49;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Office 2007 Blue Skin</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Apply the Office 2007 Blue theme to give the editor a familiar Microsoft Office-inspired look. The blue chrome and ribbon-style toolbar layout make it easy for users already comfortable with Office applications.</p>
+                    <richtextbox name="office2007BlueEditor" toolbar="office" skin="office2007blue" height="400px" html="<h2>Internal Memo</h2><p><strong>To:</strong> All Department Heads</p><p><strong>From:</strong> Jennifer Park, VP of Operations</p><p><strong>Date:</strong> April 7, 2026</p><p><strong>Subject:</strong> Office Relocation Schedule</p><hr /><p>Please be advised that the corporate office relocation to the downtown campus will proceed as planned. The move is organized in three phases:</p><ol><li><strong>Phase 1 (May 1 &ndash; May 10):</strong> IT infrastructure and server room migration. Expect intermittent VPN access during this window.</li><li><strong>Phase 2 (May 12 &ndash; May 20):</strong> Engineering and product teams transition to the new building. Temporary desk assignments will be shared via email.</li><li><strong>Phase 3 (May 22 &ndash; May 30):</strong> Sales, marketing, and administrative staff complete the move. The old office lease terminates June 1.</li></ol><p>Each department should designate a <u>relocation coordinator</u> to liaise with the facilities team. Packing supplies will be distributed the week of April 21.</p><p>If you have questions or scheduling conflicts, please contact Facilities at <em>facilities@company.example</em>.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">The Office 2007 Blue skin provides an Office-style ribbon interface familiar to Microsoft Office users.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="office"
+    skin="office2007blue"
+    height="400px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

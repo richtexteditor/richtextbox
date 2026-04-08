@@ -1,0 +1,43 @@
+@page
+@{
+    ViewData["Title"] = "Multiple Editor Drafts";
+    ViewData["DemoNumber"] = 58;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Multiple Editor Drafts</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Two editors on the same page with independent autosave keys. Each editor maintains its own draft in localStorage.</p>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <h4 class="mb-2 font-semibold">Editor A</h4>
+                            <richtextbox name="multiDraftEditorA" toolbar="default" height="200px" auto-save="true" auto-save-key="demo-multi-draft-a" auto-save-delay="600" html="<p>This is Editor A with its own autosave key.</p>"></richtextbox>
+                        </div>
+                        <div>
+                            <h4 class="mb-2 font-semibold">Editor B</h4>
+                            <richtextbox name="multiDraftEditorB" toolbar="default" height="200px" auto-save="true" auto-save-key="demo-multi-draft-b" auto-save-delay="600" html="<p>This is Editor B with a separate autosave key.</p>"></richtextbox>
+                        </div>
+                    </div>
+                    <div class="code-panel">
+<pre><code>&lt;!-- Editor A --&gt;
+&lt;richtextbox toolbar="default" height="200px"
+    auto-save="true"
+    auto-save-key="demo-multi-draft-a"
+    auto-save-delay="600"
+    html="..." /&gt;
+
+&lt;!-- Editor B --&gt;
+&lt;richtextbox toolbar="default" height="200px"
+    auto-save="true"
+    auto-save-key="demo-multi-draft-b"
+    auto-save-delay="600"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+@page
+@{
+    ViewData["Title"] = "Form Post";
+    ViewData["DemoNumber"] = 83;
+    var postedBody = Request.HasFormContentType ? Request.Form["Body"].ToString() : null;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Form Post</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Demonstrates how to capture editor content via a standard HTML form POST with model binding. Edit the content below and click Submit to see the raw HTML sent to the server.</p>
+
+                    <form method="post">
+                        <richtextbox
+                            id="formPostEditor"
+                            name="Body"
+                            toolbar="default"
+                            width="100%"
+                            height="300px"
+                            html="<h3>Product Review: Wireless Noise-Canceling Headphones</h3><p><strong>Rating: 4 out of 5 stars</strong></p><p><strong>Pros:</strong></p><ul><li>Excellent noise cancellation blocks out office and commute noise</li><li>Comfortable memory-foam ear cushions for all-day wear</li><li>30-hour battery life with fast USB-C charging</li></ul><p><strong>Cons:</strong></p><ul><li>Slightly heavy compared to competitors</li><li>Companion app could use a simpler interface</li></ul><p>Overall, these headphones deliver outstanding audio quality and comfort at a competitive price. Highly recommended for commuters and remote workers.</p>"></richtextbox>
+
+                        <div style="margin-top:12px">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+
+                    @if (!string.IsNullOrEmpty(postedBody))
+                    {
+                        <div style="margin-top:16px;padding:12px;border:1px solid #ccc;border-radius:4px;background:#f9f9f9">
+                            <strong>Posted HTML:</strong>
+                            <pre style="white-space:pre-wrap">@postedBody</pre>
+                        </div>
+                    }
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">The editor automatically syncs its content to a hidden textarea. On form submit, the HTML is posted as a standard form field.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;form method="post"&gt;
+    &lt;richtextbox
+        name="Body"
+        toolbar="default"
+        height="300px"
+        html="..." /&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

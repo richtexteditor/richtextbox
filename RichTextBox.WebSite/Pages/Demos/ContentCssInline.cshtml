@@ -1,0 +1,25 @@
+@page
+@{
+    ViewData["Title"] = "Inline Content CSS";
+    ViewData["DemoNumber"] = 51;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Inline Content CSS</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Define content styles inline using content-css-text instead of linking an external stylesheet. Ideal for quick customizations without a separate CSS file.</p>
+                    <richtextbox name="contentCssInlineEditor" toolbar="default" height="300px" content-css-text="body { font-family: Georgia, serif; font-size: 16px; line-height: 1.8; color: #333; }" html="<p>This editor has inline CSS applied to its content area. The font is Georgia with generous line height for comfortable reading.</p><p>Inline content CSS is convenient when you need simple style overrides without a separate file.</p>"></richtextbox>
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="default"
+    height="300px"
+    content-css-text="body { font-family: Georgia, serif; font-size: 16px; line-height: 1.8; color: #333; }"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

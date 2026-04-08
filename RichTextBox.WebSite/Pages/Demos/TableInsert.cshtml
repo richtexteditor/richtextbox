@@ -1,0 +1,45 @@
+@page
+@{
+    ViewData["Title"] = "Insert Table";
+    ViewData["DemoNumber"] = 27;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Insert Table</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Create and edit tables directly inside the editor. Use the insert table dialog to specify rows and columns, then populate cells with text, numbers, or formatted content.</p>
+
+                    <richtextbox
+                        id="tableInsertEditor"
+                        name="tableInsertEditor"
+                        toolbar="{inserttable}|{bold,italic}|{undo,redo}"
+                        width="100%"
+                        height="350px"
+                        enable-context-menu="true"
+                        context-menu-mode="Default"
+                        html="<h2>Quarterly Sales Summary</h2><p>The table below shows revenue figures across four product lines for the first half of the fiscal year.</p><table border='1' style='width:100%;border-collapse:collapse'><tr style='background-color:#f0f0f0'><th style='padding:8px;text-align:left'>Product Line</th><th style='padding:8px;text-align:right'>Q1 Revenue</th><th style='padding:8px;text-align:right'>Q2 Revenue</th><th style='padding:8px;text-align:right'>Change</th></tr><tr><td style='padding:8px'>Enterprise Platform</td><td style='padding:8px;text-align:right'>$1,240,000</td><td style='padding:8px;text-align:right'>$1,385,000</td><td style='padding:8px;text-align:right;color:#16a34a'>+11.7%</td></tr><tr><td style='padding:8px'>Cloud Services</td><td style='padding:8px;text-align:right'>$890,000</td><td style='padding:8px;text-align:right'>$1,020,000</td><td style='padding:8px;text-align:right;color:#16a34a'>+14.6%</td></tr><tr><td style='padding:8px'>Developer Tools</td><td style='padding:8px;text-align:right'>$430,000</td><td style='padding:8px;text-align:right'>$415,000</td><td style='padding:8px;text-align:right;color:#dc2626'>-3.5%</td></tr><tr><td style='padding:8px'>Support Contracts</td><td style='padding:8px;text-align:right'>$310,000</td><td style='padding:8px;text-align:right'>$340,000</td><td style='padding:8px;text-align:right;color:#16a34a'>+9.7%</td></tr></table><p><em>All figures are in USD. Data is preliminary and subject to final audit.</em></p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Click the Table button in the toolbar to insert a table. Specify rows and columns in the insert dialog.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="tableInsertEditor"
+    toolbar="{inserttable}|{bold,italic}|{undo,redo}"
+    height="350px"
+    enable-context-menu="true"
+    context-menu-mode="Default"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

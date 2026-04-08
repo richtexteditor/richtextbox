@@ -1,0 +1,50 @@
+@page
+@{
+    ViewData["Title"] = "Template Categories";
+    ViewData["DemoNumber"] = 42;
+    var htmlTemplatesJson = System.Text.Json.JsonSerializer.Serialize(new[]
+    {
+        new { name = "Email - Welcome", html = "<h2>Welcome to [Company]!</h2><p>Hi [Name],</p><p>Thank you for joining us. We are excited to have you on board. Here are a few things to get you started:</p><ol><li>Complete your profile</li><li>Explore the dashboard</li><li>Reach out to support if you need help</li></ol><p>Best regards,<br/>The [Company] Team</p>" },
+        new { name = "Report - Monthly", html = "<h1>Monthly Report - [Month] [Year]</h1><h2>Executive Summary</h2><p>[Summary paragraph]</p><h2>Key Metrics</h2><table border='1' style='width:100%;border-collapse:collapse'><tr><th>Metric</th><th>Target</th><th>Actual</th></tr><tr><td>Revenue</td><td>$[target]</td><td>$[actual]</td></tr><tr><td>Users</td><td>[target]</td><td>[actual]</td></tr></table><h2>Next Steps</h2><ul><li>Action item 1</li><li>Action item 2</li></ul>" },
+        new { name = "Blog - Post", html = "<h1>[Blog Post Title]</h1><p><em>Published on [Date] by [Author]</em></p><p>[Opening paragraph that hooks the reader and introduces the topic.]</p><h2>Main Section</h2><p>[Body content goes here. Break up long content with subheadings and lists.]</p><h2>Conclusion</h2><p>[Wrap up with a summary and call to action.]</p>" }
+    });
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Template Categories</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Organize templates into logical groups using the template array structure. Each template has a name and HTML content.</p>
+
+                    <richtextbox
+                        id="templateCategoriesEditor"
+                        name="templateCategoriesEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="400px"
+                        html-templates-json="@htmlTemplatesJson"
+                        html="<p>Click the Templates button to browse templates organized by category: Email, Report, and Blog.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>@@{
+    var htmlTemplatesJson = JsonSerializer.Serialize(new[]
+    {
+        new { name = "Email - Welcome", html = "&lt;h2&gt;Welcome...&lt;/h2&gt;..." },
+        new { name = "Report - Monthly", html = "&lt;h1&gt;Monthly Report...&lt;/h1&gt;..." },
+        new { name = "Blog - Post", html = "&lt;h1&gt;[Blog Post Title]&lt;/h1&gt;..." }
+    });
+}
+
+&lt;richtextbox
+    name="templateCategoriesEditor"
+    toolbar="full"
+    height="400px"
+    html-templates-json="@@htmlTemplatesJson" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

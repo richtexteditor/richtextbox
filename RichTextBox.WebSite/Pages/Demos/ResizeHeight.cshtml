@@ -1,0 +1,26 @@
+@page
+@{
+    ViewData["Title"] = "Resize Height Only";
+    ViewData["DemoNumber"] = 66;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Resize Height Only</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Allow vertical resizing only — the editor width stays fixed while height can be adjusted by dragging the resize handle.</p>
+                    <richtextbox name="resizeHeightEditor" toolbar="default" height="300px" width="100%" resize-mode="height" html="<p>Drag the resize handle to change the height of this editor. The width remains fixed.</p>"></richtextbox>
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="default"
+    height="300px"
+    width="100%"
+    resize-mode="height"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

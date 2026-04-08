@@ -1,0 +1,39 @@
+@page
+@{
+    ViewData["Title"] = "Paste Cleanup";
+    ViewData["DemoNumber"] = 64;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Paste Cleanup</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Compare Auto and Text paste modes side by side. Paste the same content into both editors to see how each mode handles formatting differently.</p>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <h4 class="mb-2 font-semibold">Auto Mode</h4>
+                            <richtextbox name="pasteCleanupAutoEditor" toolbar="default" height="250px" paste-mode="Auto" html="<p>Paste content here — Auto mode detects the format automatically.</p>"></richtextbox>
+                        </div>
+                        <div>
+                            <h4 class="mb-2 font-semibold">Text Mode</h4>
+                            <richtextbox name="pasteCleanupTextEditor" toolbar="default" height="250px" paste-mode="Text" html="<p>Paste content here — Text mode strips all formatting.</p>"></richtextbox>
+                        </div>
+                    </div>
+                    <div class="code-panel">
+<pre><code>&lt;!-- Auto Mode --&gt;
+&lt;richtextbox toolbar="default" height="250px"
+    paste-mode="Auto"
+    html="..." /&gt;
+
+&lt;!-- Text Mode --&gt;
+&lt;richtextbox toolbar="default" height="250px"
+    paste-mode="Text"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

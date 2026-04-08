@@ -1,0 +1,42 @@
+@page
+@{
+    ViewData["Title"] = "Configuration Options";
+    ViewData["DemoNumber"] = 3;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Configuration Options</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Two editors with different configuration sets showing how Tag Helper attributes control behavior.</p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="mb-2 font-['Sora'] text-sm font-semibold text-slate-900">Basic Toolbar</h3>
+                            <richtextbox
+                                id="configEditor1"
+                                name="configEditor1"
+                                toolbar="basic"
+                                width="100%"
+                                height="300px"
+                                html="<p>Basic toolbar with minimal buttons.</p>"></richtextbox>
+                        </div>
+                        <div>
+                            <h3 class="mb-2 font-['Sora'] text-sm font-semibold text-slate-900">Full Toolbar + Statistics</h3>
+                            <richtextbox
+                                id="configEditor2"
+                                name="configEditor2"
+                                toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                                show-statistics="true"
+                                width="100%"
+                                height="300px"
+                                html="<p>Full toolbar with statistics bar enabled.</p>"></richtextbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

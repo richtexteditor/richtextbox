@@ -1,0 +1,38 @@
+@page
+@{
+    ViewData["Title"] = "Default Context Menu";
+    ViewData["DemoNumber"] = 45;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Default Context Menu</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">The Default context menu preset provides the most comprehensive set of right-click options including formatting, insert, table operations, and clipboard actions.</p>
+
+                    <richtextbox
+                        id="defaultCtxEditor"
+                        name="defaultCtxEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="350px"
+                        enable-context-menu="true"
+                        context-menu-mode="Default"
+                        html="<p>Right-click anywhere in this editor to see the full Default context menu. Try right-clicking on:</p><ul><li>Plain text for formatting options</li><li><a href='https://example.com'>This link</a> for link-specific actions</li></ul><table border='1' style='width:100%;border-collapse:collapse'><tr><td>Table cell</td><td>Right-click for table operations</td></tr></table>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="defaultCtxEditor"
+    toolbar="full"
+    height="350px"
+    enable-context-menu="true"
+    context-menu-mode="Default"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

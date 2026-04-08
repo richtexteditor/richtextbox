@@ -1,0 +1,34 @@
+@page
+@{
+    ViewData["Title"] = "Insert Emoji";
+    ViewData["DemoNumber"] = 37;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Insert Emoji</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Browse and insert emoji characters from the emoji picker dialog.</p>
+
+                    <richtextbox
+                        id="emojiEditor"
+                        name="emojiEditor"
+                        toolbar="{insertemoji}|{bold,italic}|{undo,redo}"
+                        width="100%"
+                        height="300px"
+                        html="<p>Click the emoji button to open the emoji picker. Browse categories and click to insert your chosen emoji into the content.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="emojiEditor"
+    toolbar="{insertemoji}|{bold,italic}|{undo,redo}"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

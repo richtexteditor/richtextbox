@@ -1,0 +1,82 @@
+@page
+@{
+    ViewData["Title"] = "JavaScript API";
+    ViewData["DemoNumber"] = 5;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">JavaScript API</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Control the editor programmatically using execCommand, getHTML, and setHTML from external buttons.</p>
+
+                    <richtextbox
+                        id="apiEditor"
+                        name="apiEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<p>Use the buttons below to interact with the editor through JavaScript.</p>"></richtextbox>
+
+                    <div class="mt-4 flex flex-wrap gap-3">
+                        <button type="button" id="btnGetHtml" class="btn btn-primary btn-sm">Get HTML</button>
+                        <button type="button" id="btnSetHtml" class="btn btn-primary btn-sm">Set HTML</button>
+                        <button type="button" id="btnBold" class="btn btn-primary btn-sm">Bold</button>
+                        <button type="button" id="btnFocus" class="btn btn-primary btn-sm">Focus</button>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>// Get the editor instance
+var editor = document.getElementById("apiEditor").editor;
+
+// Get HTML content
+var html = editor.getHTML();
+
+// Set HTML content
+editor.setHTML("&lt;p&gt;New content&lt;/p&gt;");
+
+// Execute a formatting command
+editor.execCommand("bold");
+
+// Focus the editor
+editor.focus();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    function getEditor() {
+        return window.richTextBoxEditors && window.richTextBoxEditors.apiEditor
+            ? window.richTextBoxEditors.apiEditor
+            : window.apiEditor;
+    }
+
+    document.getElementById("btnGetHtml").addEventListener("click", function () {
+        var editor = getEditor();
+        if (editor) alert(editor.getHTML());
+    });
+
+    document.getElementById("btnSetHtml").addEventListener("click", function () {
+        var editor = getEditor();
+        if (editor) editor.setHTML("<h3>Content set via JavaScript</h3><p>This content was inserted using <code>editor.setHTML()</code>.</p>");
+    });
+
+    document.getElementById("btnBold").addEventListener("click", function () {
+        var editor = getEditor();
+        if (editor) { editor.focus(); editor.execCommand("bold"); }
+    });
+
+    document.getElementById("btnFocus").addEventListener("click", function () {
+        var editor = getEditor();
+        if (editor) editor.focus();
+    });
+})();
+</script>
+}

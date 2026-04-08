@@ -1,0 +1,59 @@
+@page
+@{
+    ViewData["Title"] = "Full Toolbar";
+    ViewData["DemoNumber"] = 7;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Full Toolbar</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">The full toolbar preset exposes every available button, including advanced insert dialogs, paragraph operations, table editing, and layout tools. Use this when your users need complete control over document formatting and structure.</p>
+
+                    <richtextbox
+                        id="fullToolbarEditor"
+                        name="fullToolbarEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        skin="default"
+                        width="100%"
+                        height="500px"
+                        html="<h2>Monthly Team Newsletter</h2><h3>Project Highlights &amp; Updates</h3><p>We are excited to share this month's progress across all departments. Our team has achieved <strong>record delivery milestones</strong> and <em>improved customer satisfaction scores</em> by 18%.</p><table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;width:100%'><tr style='background:#f0f0f0'><th>Department</th><th>Status</th><th>Key Metric</th></tr><tr><td>Engineering</td><td>On Track</td><td>99.9% Uptime</td></tr><tr><td>Marketing</td><td>Ahead</td><td>+42% Leads</td></tr><tr><td>Support</td><td>On Track</td><td>4.8/5 Rating</td></tr></table><blockquote><p>Innovation distinguishes between a leader and a follower. Our commitment to excellence drives everything we do.</p></blockquote><h3>Action Items for Next Month</h3><ol><li>Finalize the Q3 roadmap and share with stakeholders</li><li>Launch the redesigned customer portal by July 15</li><li>Complete security audit and compliance review</li><li>Onboard five new team members across departments</li></ol><hr /><p>For questions or feedback, reach out to the communications team. Together we build something great.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">The full toolbar includes every registered command button. For a curated selection, use the custom toolbar option.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="fullToolbarEditor"
+    toolbar="{bold,italic,underline,linethrough,superscript,subscript}
+             |{forecolor,backcolor}
+             |{justifyleft,justifycenter,justifyright,justifyfull}
+             |{insertorderedlist,insertunorderedlist,multilevellist,
+               inserttodolist,indent,outdent}
+             #{paragraphs:toggle,fontname:toggle,fontsize:toggle,
+               inlinestyle,lineheight,casechange}|{undo,redo}
+             / {formatpainter,removeformat,cut,copy,paste,delete,find}
+             |{insertlink,unlink,insertblockquote,insertemoji,insertchars}
+             |{inserttable,insertbookmark,insertimage,insertgallery,
+               insertvideo,insertdocument,inserttemplate,insertcode}
+             #{preview,code,selectall}|{importword,exportword,exportpdf}
+             / {insertcomment,trackchanges,insertmention}
+             |{spellcheck,autoformatting,toggleborder}
+             |{paragraphstyle,toggle_paragraphop,menu_paragraphop}
+             #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,
+               revisionhistory}
+             |{fullscreenenter,fullscreenexit,togglemore}"
+    skin="default"
+    height="500px" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

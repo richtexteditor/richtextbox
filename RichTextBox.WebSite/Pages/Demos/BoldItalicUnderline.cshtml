@@ -1,0 +1,41 @@
+@page
+@{
+    ViewData["Title"] = "Bold, Italic & Underline";
+    ViewData["DemoNumber"] = 11;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Bold, Italic &amp; Underline</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">The most fundamental text formatting commands for emphasizing content. Select any text and click the toolbar buttons or use keyboard shortcuts to toggle bold, italic, and underline styles.</p>
+
+                    <richtextbox
+                        id="biuEditor"
+                        name="biuEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<h2>Product Launch Checklist</h2><p>Before releasing the new dashboard feature, make sure every item below is addressed. Use <strong>bold</strong> to mark critical tasks, <em>italic</em> for notes and context, and <u>underline</u> for deadlines.</p><ul><li><strong>Code Review:</strong> All pull requests must be approved by at least two reviewers before merging into the release branch.</li><li><strong>QA Sign-Off:</strong> The testing team needs to complete regression tests. <em>Automated suite covers 85% of cases; manual testing is required for the remaining scenarios.</em></li><li><strong>Documentation:</strong> Update the user guide and API reference. <u>Due by end of day Friday.</u></li><li><strong>Marketing Assets:</strong> Confirm that the landing page copy and screenshots reflect the final UI. <em>Design team is handling the hero image.</em></li></ul><p>Once all items are checked off, tag the release in Git and notify the deployment team.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Bold uses Ctrl+B, italic uses Ctrl+I, and underline uses Ctrl+U keyboard shortcuts.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="biuEditor"
+    toolbar="default"
+    height="300px"
+    html="&lt;p&gt;Select this text and apply &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, or &lt;u&gt;underline&lt;/u&gt; formatting.&lt;/p&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

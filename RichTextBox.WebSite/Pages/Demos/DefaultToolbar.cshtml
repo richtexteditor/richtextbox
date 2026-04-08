@@ -1,0 +1,52 @@
+@page
+@{
+    ViewData["Title"] = "Default Toolbar";
+    ViewData["DemoNumber"] = 6;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Default Toolbar</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">The default toolbar provides the most commonly used formatting options in a clean, organized layout. It strikes a balance between functionality and simplicity, making it the best choice for most content editing scenarios.</p>
+
+                    <richtextbox
+                        id="defaultToolbarEditor"
+                        name="defaultToolbarEditor"
+                        toolbar="{bold,italic,underline,forecolor,backcolor}|{justifyleft,justifycenter,justifyright}|{insertorderedlist,insertunorderedlist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle}|{undo,redo} / {insertlink,unlink}|{inserttable,insertimage,insertgallery}|{insertblockquote,insertemoji,insertchars,inserttemplate} #{removeformat,code,toggleborder,fullscreenenter,togglemore}"
+                        skin="default"
+                        width="100%"
+                        height="350px"
+                        html="<h3>Meeting Notes - Product Review</h3><p><strong>Date:</strong> Monday, April 7 | <strong>Duration:</strong> 45 minutes</p><p><strong>Attendees:</strong></p><ul><li>Sarah Chen - Product Manager</li><li>Marcus Johnson - Lead Engineer</li><li>Priya Patel - UX Designer</li><li>David Kim - QA Lead</li></ul><h3>Action Items</h3><ul><li>Sarah: Share updated wireframes with the team by Wednesday</li><li>Marcus: Set up staging environment for beta testing</li><li>Priya: Conduct usability testing with five participants</li><li>David: Prepare regression test suite for the new release</li></ul><p>Overall the sprint is progressing well. The team agreed to hold a follow-up session on Thursday to review the updated designs before moving into development. No blockers were identified.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">The default preset balances functionality and simplicity. It includes text formatting, lists, links, and image insertion.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="defaultToolbarEditor"
+    toolbar="{bold,italic,underline,forecolor,backcolor}
+             |{justifyleft,justifycenter,justifyright,justifyfull}
+             |{insertorderedlist,insertunorderedlist,indent,outdent}
+             |{insertblockquote,insertemoji}
+             #{paragraphs:toggle,fontname:toggle,fontsize:toggle,lineheight}
+             |{undo,redo}
+             / {formatpainter,removeformat}|{insertlink,unlink}
+             |{inserttable,insertimage,insertgallery,insertvideo,
+               insertdocument,inserttemplate}|{insertchars,insertcode}
+             #{preview,code,selectall}
+             |{toggleborder,fullscreenenter,fullscreenexit,togglemore}"
+    skin="default"
+    height="350px" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

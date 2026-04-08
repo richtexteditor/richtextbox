@@ -1,0 +1,25 @@
+@page
+@{
+    ViewData["Title"] = "Read-Only Content";
+    ViewData["DemoNumber"] = 72;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Read-Only Content</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Display rich content in a read-only editor — users can view and select text but cannot modify the content.</p>
+                    <richtextbox name="readOnlyContentEditor" toolbar="default" height="300px" read-only="true" html="<h2>Product Specifications</h2><table border='1' style='width:100%;border-collapse:collapse'><tr><th>Feature</th><th>Value</th></tr><tr><td>Platform</td><td>ASP.NET Core 8+</td></tr><tr><td>License</td><td>Perpetual</td></tr><tr><td>Support</td><td>Included</td></tr></table><p>This content is presented in read-only mode for reference purposes.</p>"></richtextbox>
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="default"
+    height="300px"
+    read-only="true"
+    html="&lt;h2&gt;Product Specifications&lt;/h2&gt;&lt;table&gt;...&lt;/table&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

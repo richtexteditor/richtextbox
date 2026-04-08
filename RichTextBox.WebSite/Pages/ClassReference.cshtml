@@ -1,0 +1,249 @@
+@page
+@{
+    ViewData["Title"] = "Class Reference";
+}
+
+<!-- Hero -->
+<section class="relative overflow-hidden border-b border-slate-200/60">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(8,145,178,0.12),transparent_24rem),radial-gradient(circle_at_80%_20%,rgba(251,191,36,0.10),transparent_20rem)]"></div>
+    <div class="relative mx-auto w-full max-w-screen-2xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-24">
+        <span class="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5 text-sm font-semibold text-cyan-800">
+            API documentation
+        </span>
+        <h1 class="mx-auto mt-6 max-w-4xl font-['Sora'] text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            Class Reference
+        </h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+            Complete Tag Helper property reference, service configuration options, and editor command documentation for the RichTextBox ASP.NET Core package.
+        </p>
+    </div>
+</section>
+
+<section class="border-b border-slate-200/60">
+    <div class="mx-auto w-full max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div class="mx-auto max-w-5xl space-y-10">
+
+            <!-- Tag Helper Properties -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Tag Helper</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">&lt;richtextbox&gt; Attributes</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">All attributes available on the <code>&lt;richtextbox&gt;</code> tag helper element.</p>
+
+                <!-- Core -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Core</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">id</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">auto</td><td class="py-2">HTML element ID for the editor instance</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">name</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">required</td><td class="py-2">Form field name for the HTML content</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">asp-for</td><td class="py-2 pr-4">expression</td><td class="py-2 pr-4">-</td><td class="py-2">Model expression for two-way binding</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">html</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">empty</td><td class="py-2">Initial HTML content for the editor</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">class</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">-</td><td class="py-2">CSS class for the editor wrapper element</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Toolbar -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Toolbar</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">toolbar</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"default"</td><td class="py-2">Toolbar preset: default, full, basic, ribbon, office, or a custom button string</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">toolbar-mobile</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"mobile"</td><td class="py-2">Toolbar layout for mobile-width screens</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Appearance -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Appearance</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">skin</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"default"</td><td class="py-2">Visual skin: default, gray, office2007blue, rounded-corner, blue</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">width</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"100%"</td><td class="py-2">Editor width (CSS value: px, %, em)</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">height</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"300px"</td><td class="py-2">Editor height (CSS value)</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">resize-mode</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"both"</td><td class="py-2">Resize mode: both, height, none</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Content Behavior -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Content Behavior</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">paste-mode</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"Auto"</td><td class="py-2">Paste handling: Auto, Text, Word, Disabled</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">enter-key-tag</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"p"</td><td class="py-2">Tag for Enter key: p, div, br</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">url-type</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"default"</td><td class="py-2">URL processing: default, relative, absolute</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">read-only</td><td class="py-2 pr-4">bool</td><td class="py-2 pr-4">false</td><td class="py-2">Makes the editor read-only</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Context Menu -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Context Menu</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">enable-context-menu</td><td class="py-2 pr-4">bool</td><td class="py-2 pr-4">false</td><td class="py-2">Enable custom right-click context menu</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">context-menu-mode</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"Default"</td><td class="py-2">Menu preset: Default, Simple, Minimal</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Statistics -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Statistics &amp; UI</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">show-tag-list</td><td class="py-2 pr-4">bool</td><td class="py-2 pr-4">true</td><td class="py-2">Show tag path in the bottom bar</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">show-statistics</td><td class="py-2 pr-4">bool</td><td class="py-2 pr-4">true</td><td class="py-2">Show character/word statistics in the bottom bar</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Styling -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Content Styling</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">content-css-url</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">built-in</td><td class="py-2">URL of a CSS file applied to the content area</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">content-css-text</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">""</td><td class="py-2">Inline CSS text applied to the content area</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">preview-css-url</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">built-in</td><td class="py-2">CSS file for the preview window</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">editor-body-css-class</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">""</td><td class="py-2">CSS class applied to the editor body element</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">editor-body-css-text</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">""</td><td class="py-2">Inline CSS for the editor body element</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Dialog Data -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Dialog Data</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">image-items-json</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">[]</td><td class="py-2">JSON array of image URLs for the insert image dialog</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">gallery-images-json</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">[]</td><td class="py-2">JSON array of {url, text} objects for the gallery</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">html-templates-json</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">[]</td><td class="py-2">JSON array of [name, html] arrays for templates</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Autosave -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Autosave</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">auto-save</td><td class="py-2 pr-4">bool</td><td class="py-2 pr-4">false</td><td class="py-2">Enable localStorage draft saving</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">auto-save-key</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">auto</td><td class="py-2">localStorage key for draft isolation</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">auto-save-delay</td><td class="py-2 pr-4">int</td><td class="py-2 pr-4">600</td><td class="py-2">Delay in milliseconds between saves</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Validation -->
+                <h3 class="mt-8 font-['Sora'] text-lg font-semibold text-slate-950">Validation</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Attribute</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">max-html-length</td><td class="py-2 pr-4">int</td><td class="py-2 pr-4">0 (unlimited)</td><td class="py-2">Maximum total HTML characters</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">max-text-length</td><td class="py-2 pr-4">int</td><td class="py-2 pr-4">0 (unlimited)</td><td class="py-2">Maximum visible text characters</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Service Configuration -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Services</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">AddRichTextBox() Options</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">Configure the RichTextBox services in <code>Program.cs</code>.</p>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Property</th><th class="py-2 pr-4 font-semibold text-slate-900">Type</th><th class="py-2 pr-4 font-semibold text-slate-900">Default</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">UploadWebPath</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"/uploads"</td><td class="py-2">Web-accessible path for uploaded files</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">MaxUploadBytes</td><td class="py-2 pr-4">long</td><td class="py-2 pr-4">4194304</td><td class="py-2">Maximum upload file size (4 MB default)</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">AllowedImageExtensions</td><td class="py-2 pr-4">string[]</td><td class="py-2 pr-4">.jpg .png .gif .webp .svg</td><td class="py-2">Allowed image file extensions</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">AllowedFileExtensions</td><td class="py-2 pr-4">string[]</td><td class="py-2 pr-4">.zip .pdf .doc .docx .rtf .txt</td><td class="py-2">Allowed non-image file extensions</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">RequireValidLicense</td><td class="py-2 pr-4">bool</td><td class="py-2 pr-4">true</td><td class="py-2">Require valid license file</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">LicenseNumber</td><td class="py-2 pr-4">string</td><td class="py-2 pr-4">"30076785"</td><td class="py-2">Expected license number</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Editor Commands -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">JavaScript</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">execCommand Reference</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">Commands available via <code>editor.execCommand(commandName)</code>.</p>
+
+                <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Formatting</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">bold, italic, underline, strike, superscript, subscript, removeformat, formatpainter, changecase</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Font &amp; Color</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">fontname, fontsize, forecolor, backcolor, lineheight, paragraphs, inlinestyle</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Alignment</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">justifyleft, justifycenter, justifyright, justifyfull, ltr, rtl</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Lists &amp; Structure</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">insertorderedlist, insertunorderedlist, indent, outdent, insertblockquote, inserthorizontalrule, inserttable</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Links &amp; Media</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">insertlink, unlink, insertimage, insertgallery, insertvideo, insertdocument, insertanchor, insertimagemap</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Insert</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">insertemoji, insertchars, insertcode, inserttemplate, insertdate, insertbox, insertlayer, insertfieldset</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">Clipboard</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">cut, copy, paste, pastetext, pasteword, delete, selectall</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">View &amp; Tools</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">code, preview, find, print, fullscreenenter, fullscreenexit, toggleborder, togglemore, help</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                        <h4 class="font-['Sora'] text-sm font-semibold text-slate-900">History</h4>
+                        <p class="mt-2 text-xs leading-5 text-slate-600">undo, redo, newdoc, save, load, cleancode</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endpoints -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Endpoints</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">MapRichTextBoxUploads()</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">Maps the following endpoints in your ASP.NET Core application:</p>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="border-b border-slate-200"><th class="py-2 pr-4 font-semibold text-slate-900">Endpoint</th><th class="py-2 pr-4 font-semibold text-slate-900">Method</th><th class="py-2 font-semibold text-slate-900">Description</th></tr></thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-2 pr-4 font-mono text-xs text-cyan-700">/richtextbox/upload</td><td class="py-2 pr-4">POST</td><td class="py-2">Upload images and files</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs text-cyan-700">/richtextbox/gallery</td><td class="py-2 pr-4">GET/POST</td><td class="py-2">Browse folders, list images, create folders</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,40 @@
+@page
+@{
+    ViewData["Title"] = "Custom Toolbar";
+    ViewData["DemoNumber"] = 9;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Custom Toolbar</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Build a focused toolbar by specifying exact button names in the toolbar attribute string. This lets you tailor the editing experience to match your application requirements and reduce visual clutter.</p>
+
+                    <richtextbox
+                        id="customToolbarEditor"
+                        name="customToolbarEditor"
+                        toolbar="{bold,italic,underline}|{fontname,fontsize}|{forecolor,backcolor}|{insertlink,insertimage}|{undo,redo}"
+                        skin="default"
+                        width="100%"
+                        height="300px"
+                        html="<h2>Project Brief: Website Redesign</h2><p><strong>Client:</strong> Northwind Traders</p><p><strong>Project Manager:</strong> Sarah Chen</p><p><strong>Deadline:</strong> August 15, 2026</p><h3>Objectives</h3><ul><li>Modernize the existing e-commerce storefront with a responsive layout</li><li>Improve page load performance by 40% across all device categories</li><li>Integrate the new product recommendation engine into category pages</li></ul><h3>Scope of Work</h3><p>The redesign covers the homepage, product catalog, shopping cart, and checkout flow. The admin dashboard and API layer are <em>out of scope</em> for this phase. All deliverables must meet WCAG 2.1 AA accessibility standards.</p><p>Please direct questions to the project team at <u>redesign@northwind.example</u>.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Define toolbar buttons as a comma-separated string. Use | for separator groups. Check the Class Reference for all available command names.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox
+    toolbar="{bold,italic,underline}|{fontname,fontsize}|{forecolor,backcolor}|{insertlink,insertimage}|{undo,redo}"
+    height="300px" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

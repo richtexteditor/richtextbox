@@ -1,0 +1,165 @@
+@{
+    var demoNumber = ViewData["DemoNumber"] as int? ?? 0;
+    string ActiveClass(int num) => num == demoNumber ? " active" : "";
+}
+<aside class="demo-sidebar hidden lg:block">
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Getting Started</div>
+        <a href="/Demos/Overview" class="demo-nav-link@(ActiveClass(1))"><span class="demo-nav-badge">1</span> Overview</a>
+        <a href="/Demos/MinimalSetup" class="demo-nav-link@(ActiveClass(2))"><span class="demo-nav-badge">2</span> Minimal Setup</a>
+        <a href="/Demos/Configuration" class="demo-nav-link@(ActiveClass(3))"><span class="demo-nav-badge">3</span> Configuration</a>
+        <a href="/Demos/TagHelperBasics" class="demo-nav-link@(ActiveClass(4))"><span class="demo-nav-badge">4</span> Tag Helper Basics</a>
+        <a href="/Demos/JavaScriptApi" class="demo-nav-link@(ActiveClass(5))"><span class="demo-nav-badge">5</span> JavaScript API</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Toolbar</div>
+        <a href="/Demos/DefaultToolbar" class="demo-nav-link@(ActiveClass(6))"><span class="demo-nav-badge">6</span> Default Toolbar</a>
+        <a href="/Demos/FullToolbar" class="demo-nav-link@(ActiveClass(7))"><span class="demo-nav-badge">7</span> Full Toolbar</a>
+        <a href="/Demos/BasicToolbar" class="demo-nav-link@(ActiveClass(8))"><span class="demo-nav-badge">8</span> Basic Toolbar</a>
+        <a href="/Demos/CustomToolbar" class="demo-nav-link@(ActiveClass(9))"><span class="demo-nav-badge">9</span> Custom Toolbar</a>
+        <a href="/Demos/ReadOnly" class="demo-nav-link@(ActiveClass(10))"><span class="demo-nav-badge">10</span> Read-Only Mode</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Text Formatting</div>
+        <a href="/Demos/BoldItalicUnderline" class="demo-nav-link@(ActiveClass(11))"><span class="demo-nav-badge">11</span> Bold, Italic &amp; Underline</a>
+        <a href="/Demos/FontFamily" class="demo-nav-link@(ActiveClass(12))"><span class="demo-nav-badge">12</span> Font Family</a>
+        <a href="/Demos/FontSize" class="demo-nav-link@(ActiveClass(13))"><span class="demo-nav-badge">13</span> Font Size</a>
+        <a href="/Demos/TextColor" class="demo-nav-link@(ActiveClass(14))"><span class="demo-nav-badge">14</span> Text Color</a>
+        <a href="/Demos/BackgroundColor" class="demo-nav-link@(ActiveClass(15))"><span class="demo-nav-badge">15</span> Background Color</a>
+        <a href="/Demos/LineHeight" class="demo-nav-link@(ActiveClass(16))"><span class="demo-nav-badge">16</span> Line Height</a>
+        <a href="/Demos/ParagraphFormat" class="demo-nav-link@(ActiveClass(17))"><span class="demo-nav-badge">17</span> Paragraph Format</a>
+        <a href="/Demos/SuperscriptSubscript" class="demo-nav-link@(ActiveClass(18))"><span class="demo-nav-badge">18</span> Superscript &amp; Subscript</a>
+        <a href="/Demos/Strikethrough" class="demo-nav-link@(ActiveClass(19))"><span class="demo-nav-badge">19</span> Strikethrough</a>
+        <a href="/Demos/RemoveFormat" class="demo-nav-link@(ActiveClass(20))"><span class="demo-nav-badge">20</span> Remove Format</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Lists &amp; Structure</div>
+        <a href="/Demos/OrderedList" class="demo-nav-link@(ActiveClass(21))"><span class="demo-nav-badge">21</span> Ordered List</a>
+        <a href="/Demos/UnorderedList" class="demo-nav-link@(ActiveClass(22))"><span class="demo-nav-badge">22</span> Unordered List</a>
+        <a href="/Demos/TodoList" class="demo-nav-link@(ActiveClass(23))"><span class="demo-nav-badge">23</span> Todo List</a>
+        <a href="/Demos/IndentOutdent" class="demo-nav-link@(ActiveClass(24))"><span class="demo-nav-badge">24</span> Indent &amp; Outdent</a>
+        <a href="/Demos/BlockQuote" class="demo-nav-link@(ActiveClass(25))"><span class="demo-nav-badge">25</span> Block Quote</a>
+        <a href="/Demos/HorizontalRule" class="demo-nav-link@(ActiveClass(26))"><span class="demo-nav-badge">26</span> Horizontal Rule</a>
+        <a href="/Demos/TableInsert" class="demo-nav-link@(ActiveClass(27))"><span class="demo-nav-badge">27</span> Insert Table</a>
+        <a href="/Demos/TableOperations" class="demo-nav-link@(ActiveClass(28))"><span class="demo-nav-badge">28</span> Table Operations</a>
+        <a href="/Demos/NestedLists" class="demo-nav-link@(ActiveClass(29))"><span class="demo-nav-badge">29</span> Nested Lists</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Links &amp; Media</div>
+        <a href="/Demos/InsertLink" class="demo-nav-link@(ActiveClass(30))"><span class="demo-nav-badge">30</span> Insert Link</a>
+        <a href="/Demos/EditLink" class="demo-nav-link@(ActiveClass(31))"><span class="demo-nav-badge">31</span> Edit Link</a>
+        <a href="/Demos/Unlink" class="demo-nav-link@(ActiveClass(32))"><span class="demo-nav-badge">32</span> Remove Link</a>
+        <a href="/Demos/ImageUrl" class="demo-nav-link@(ActiveClass(33))"><span class="demo-nav-badge">33</span> Image by URL</a>
+        <a href="/Demos/ImageGallery" class="demo-nav-link@(ActiveClass(34))"><span class="demo-nav-badge">34</span> Image Gallery</a>
+        <a href="/Demos/VideoInsert" class="demo-nav-link@(ActiveClass(35))"><span class="demo-nav-badge">35</span> Insert Video</a>
+        <a href="/Demos/DocumentInsert" class="demo-nav-link@(ActiveClass(36))"><span class="demo-nav-badge">36</span> Insert Document</a>
+        <a href="/Demos/EmojiInsert" class="demo-nav-link@(ActiveClass(37))"><span class="demo-nav-badge">37</span> Insert Emoji</a>
+        <a href="/Demos/SpecialCharacters" class="demo-nav-link@(ActiveClass(38))"><span class="demo-nav-badge">38</span> Special Characters</a>
+        <a href="/Demos/CodeInsert" class="demo-nav-link@(ActiveClass(39))"><span class="demo-nav-badge">39</span> Code Blocks</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Content Templates</div>
+        <a href="/Demos/BasicTemplates" class="demo-nav-link@(ActiveClass(40))"><span class="demo-nav-badge">40</span> Basic Templates</a>
+        <a href="/Demos/CustomTemplates" class="demo-nav-link@(ActiveClass(41))"><span class="demo-nav-badge">41</span> Custom Templates</a>
+        <a href="/Demos/TemplateCategories" class="demo-nav-link@(ActiveClass(42))"><span class="demo-nav-badge">42</span> Template Categories</a>
+        <a href="/Demos/DynamicTemplates" class="demo-nav-link@(ActiveClass(43))"><span class="demo-nav-badge">43</span> Dynamic Templates</a>
+        <a href="/Demos/TemplatePreview" class="demo-nav-link@(ActiveClass(44))"><span class="demo-nav-badge">44</span> Template Preview</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Context Menu</div>
+        <a href="/Demos/DefaultContextMenu" class="demo-nav-link@(ActiveClass(45))"><span class="demo-nav-badge">45</span> Default Menu</a>
+        <a href="/Demos/DisabledContextMenu" class="demo-nav-link@(ActiveClass(46))"><span class="demo-nav-badge">46</span> Disabled Menu</a>
+        <a href="/Demos/ContextMenuOnElements" class="demo-nav-link@(ActiveClass(47))"><span class="demo-nav-badge">47</span> Context-Sensitive</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Skins &amp; Styling</div>
+        <a href="/Demos/DefaultSkin" class="demo-nav-link@(ActiveClass(48))"><span class="demo-nav-badge">48</span> Default Skin</a>
+        <a href="/Demos/Office2007BlueSkin" class="demo-nav-link@(ActiveClass(49))"><span class="demo-nav-badge">49</span> Office 2007 Blue</a>
+        <a href="/Demos/ContentCss" class="demo-nav-link@(ActiveClass(50))"><span class="demo-nav-badge">50</span> Content CSS</a>
+        <a href="/Demos/ContentCssInline" class="demo-nav-link@(ActiveClass(51))"><span class="demo-nav-badge">51</span> Inline Content CSS</a>
+        <a href="/Demos/EditorBodyCss" class="demo-nav-link@(ActiveClass(52))"><span class="demo-nav-badge">52</span> Editor Body CSS Class</a>
+        <a href="/Demos/EditorBodyCssText" class="demo-nav-link@(ActiveClass(53))"><span class="demo-nav-badge">53</span> Editor Body Inline CSS</a>
+        <a href="/Demos/PreviewCss" class="demo-nav-link@(ActiveClass(54))"><span class="demo-nav-badge">54</span> Preview CSS</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Autosave &amp; Drafts</div>
+        <a href="/Demos/BasicAutosave" class="demo-nav-link@(ActiveClass(55))"><span class="demo-nav-badge">55</span> Basic Autosave</a>
+        <a href="/Demos/CustomAutosaveKey" class="demo-nav-link@(ActiveClass(56))"><span class="demo-nav-badge">56</span> Custom Key</a>
+        <a href="/Demos/CustomAutosaveDelay" class="demo-nav-link@(ActiveClass(57))"><span class="demo-nav-badge">57</span> Custom Delay</a>
+        <a href="/Demos/MultipleEditorDrafts" class="demo-nav-link@(ActiveClass(58))"><span class="demo-nav-badge">58</span> Multiple Editors</a>
+        <a href="/Demos/DraftRecovery" class="demo-nav-link@(ActiveClass(59))"><span class="demo-nav-badge">59</span> Draft Recovery</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Paste Handling</div>
+        <a href="/Demos/AutoPaste" class="demo-nav-link@(ActiveClass(60))"><span class="demo-nav-badge">60</span> Auto Paste</a>
+        <a href="/Demos/PasteText" class="demo-nav-link@(ActiveClass(61))"><span class="demo-nav-badge">61</span> Paste as Text</a>
+        <a href="/Demos/PasteWord" class="demo-nav-link@(ActiveClass(62))"><span class="demo-nav-badge">62</span> Paste from Word</a>
+        <a href="/Demos/PasteDisabled" class="demo-nav-link@(ActiveClass(63))"><span class="demo-nav-badge">63</span> Paste Disabled</a>
+        <a href="/Demos/PasteCleanup" class="demo-nav-link@(ActiveClass(64))"><span class="demo-nav-badge">64</span> Paste Cleanup</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Resize &amp; Layout</div>
+        <a href="/Demos/ResizeBoth" class="demo-nav-link@(ActiveClass(65))"><span class="demo-nav-badge">65</span> Resize Both</a>
+        <a href="/Demos/ResizeHeight" class="demo-nav-link@(ActiveClass(66))"><span class="demo-nav-badge">66</span> Resize Height</a>
+        <a href="/Demos/NoResize" class="demo-nav-link@(ActiveClass(67))"><span class="demo-nav-badge">67</span> No Resize</a>
+        <a href="/Demos/FullWidth" class="demo-nav-link@(ActiveClass(68))"><span class="demo-nav-badge">68</span> Full Width</a>
+        <a href="/Demos/FixedDimensions" class="demo-nav-link@(ActiveClass(69))"><span class="demo-nav-badge">69</span> Fixed Dimensions</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Validation &amp; Limits</div>
+        <a href="/Demos/MaxHtmlLength" class="demo-nav-link@(ActiveClass(70))"><span class="demo-nav-badge">70</span> Max HTML Length</a>
+        <a href="/Demos/MaxTextLength" class="demo-nav-link@(ActiveClass(71))"><span class="demo-nav-badge">71</span> Max Text Length</a>
+        <a href="/Demos/ReadOnlyContent" class="demo-nav-link@(ActiveClass(72))"><span class="demo-nav-badge">72</span> Read-Only Content</a>
+        <a href="/Demos/ShowStatistics" class="demo-nav-link@(ActiveClass(73))"><span class="demo-nav-badge">73</span> Word &amp; Char Count</a>
+        <a href="/Demos/ShowTagList" class="demo-nav-link@(ActiveClass(74))"><span class="demo-nav-badge">74</span> Tag Path Navigation</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Image Handling</div>
+        <a href="/Demos/ImageUpload" class="demo-nav-link@(ActiveClass(75))"><span class="demo-nav-badge">75</span> Image Upload</a>
+        <a href="/Demos/GalleryBrowse" class="demo-nav-link@(ActiveClass(76))"><span class="demo-nav-badge">76</span> Gallery Browse</a>
+        <a href="/Demos/FolderCreate" class="demo-nav-link@(ActiveClass(77))"><span class="demo-nav-badge">77</span> Folder Create</a>
+        <a href="/Demos/ImageItemsList" class="demo-nav-link@(ActiveClass(78))"><span class="demo-nav-badge">78</span> Image Items List</a>
+        <a href="/Demos/GalleryImagesList" class="demo-nav-link@(ActiveClass(79))"><span class="demo-nav-badge">79</span> Gallery Images List</a>
+        <a href="/Demos/ImageAlign" class="demo-nav-link@(ActiveClass(80))"><span class="demo-nav-badge">80</span> Image Alignment</a>
+        <a href="/Demos/ImageResize" class="demo-nav-link@(ActiveClass(81))"><span class="demo-nav-badge">81</span> Image Resize</a>
+        <a href="/Demos/DragDropImage" class="demo-nav-link@(ActiveClass(82))"><span class="demo-nav-badge">82</span> Drag &amp; Drop Image</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Integration</div>
+        <a href="/Demos/FormPost" class="demo-nav-link@(ActiveClass(83))"><span class="demo-nav-badge">83</span> Form Post</a>
+        <a href="/Demos/MultipleEditors" class="demo-nav-link@(ActiveClass(84))"><span class="demo-nav-badge">84</span> Multiple Editors</a>
+        <a href="/Demos/ModelBinding" class="demo-nav-link@(ActiveClass(85))"><span class="demo-nav-badge">85</span> Model Binding</a>
+        <a href="/Demos/UploadEndpoint" class="demo-nav-link@(ActiveClass(86))"><span class="demo-nav-badge">86</span> Upload Endpoint</a>
+        <a href="/Demos/AjaxSubmit" class="demo-nav-link@(ActiveClass(87))"><span class="demo-nav-badge">87</span> Ajax Submit</a>
+        <a href="/Demos/InitialContent" class="demo-nav-link@(ActiveClass(88))"><span class="demo-nav-badge">88</span> Initial Content</a>
+        <a href="/Demos/EnterKeyTag" class="demo-nav-link@(ActiveClass(89))"><span class="demo-nav-badge">89</span> Enter Key Tag</a>
+        <a href="/Demos/UrlType" class="demo-nav-link@(ActiveClass(90))"><span class="demo-nav-badge">90</span> URL Type</a>
+        <a href="/Demos/TextDirection" class="demo-nav-link@(ActiveClass(91))"><span class="demo-nav-badge">91</span> Text Direction</a>
+    </div>
+
+    <div class="demo-nav-group">
+        <div class="demo-nav-group-title">Advanced</div>
+        <a href="/Demos/SourceCodeView" class="demo-nav-link@(ActiveClass(92))"><span class="demo-nav-badge">92</span> Source Code View</a>
+        <a href="/Demos/PreviewMode" class="demo-nav-link@(ActiveClass(93))"><span class="demo-nav-badge">93</span> Preview Mode</a>
+        <a href="/Demos/FindReplace" class="demo-nav-link@(ActiveClass(94))"><span class="demo-nav-badge">94</span> Find &amp; Replace</a>
+        <a href="/Demos/FormatPainter" class="demo-nav-link@(ActiveClass(95))"><span class="demo-nav-badge">95</span> Format Painter</a>
+        <a href="/Demos/PrintContent" class="demo-nav-link@(ActiveClass(96))"><span class="demo-nav-badge">96</span> Print Content</a>
+        <a href="/Demos/FullScreen" class="demo-nav-link@(ActiveClass(97))"><span class="demo-nav-badge">97</span> Full Screen</a>
+        <a href="/Demos/CaseChange" class="demo-nav-link@(ActiveClass(98))"><span class="demo-nav-badge">98</span> Case Change</a>
+        <a href="/Demos/Placeholder" class="demo-nav-link@(ActiveClass(99))"><span class="demo-nav-badge">99</span> Placeholder Text</a>
+        <a href="/Demos/UndoRedo" class="demo-nav-link@(ActiveClass(100))"><span class="demo-nav-badge">100</span> Undo &amp; Redo</a>
+    </div>
+</aside>

@@ -1,0 +1,109 @@
+@page
+@{
+    ViewData["Title"] = "Frequently Asked Questions";
+}
+
+<!-- Hero -->
+<section class="relative overflow-hidden border-b border-slate-200/60">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(8,145,178,0.12),transparent_24rem),radial-gradient(circle_at_80%_20%,rgba(251,191,36,0.10),transparent_20rem)]"></div>
+    <div class="relative mx-auto w-full max-w-screen-2xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-24">
+        <span class="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5 text-sm font-semibold text-cyan-800">
+            Common questions answered
+        </span>
+        <h1 class="mx-auto mt-6 max-w-4xl font-['Sora'] text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            Frequently Asked Questions
+        </h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+            Answers to common questions about licensing, installation, features, and migration.
+        </p>
+    </div>
+</section>
+
+<section class="border-b border-slate-200/60">
+    <div class="mx-auto w-full max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div class="mx-auto max-w-4xl space-y-10">
+
+            <!-- Sales FAQ -->
+            <div>
+                <h2 class="font-['Sora'] text-2xl font-bold text-slate-950">Sales &amp; Licensing</h2>
+                <div class="mt-6 space-y-4">
+                    <details class="accordion">
+                        <summary class="accordion-header">Is there a free trial available?</summary>
+                        <div class="accordion-body"><p>Yes. Download <code>richtextbox.zip</code> from the <a href="/Download">Download page</a> for a complete trial bundle including a runnable Visual Studio solution, live demos, and a pre-configured license file.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">What license types are available?</summary>
+                        <div class="accordion-body"><p>Perpetual licenses start at $129 for a single domain. Options include Domain, IP, Small Business, Developer, Redistribution, Developer Team, Enterprise, and Source Code licenses. Visit the <a href="/Pricing">Purchase page</a> for details.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Are updates included?</summary>
+                        <div class="accordion-body"><p>Yes. All license types include free updates for the purchased major version.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">What payment methods are accepted?</summary>
+                        <div class="accordion-body"><p>Checkout is completed securely through the official Richscripts client center via PayPal, which accepts all major credit cards.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Can I upgrade my license later?</summary>
+                        <div class="accordion-body"><p>Yes. Contact <a href="mailto:sales@richtexteditor.net">sales@richtexteditor.net</a> for license upgrade pricing and assistance.</p></div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Functionality FAQ -->
+            <div>
+                <h2 class="font-['Sora'] text-2xl font-bold text-slate-950">Functionality</h2>
+                <div class="mt-6 space-y-4">
+                    <details class="accordion">
+                        <summary class="accordion-header">Which browsers are supported?</summary>
+                        <div class="accordion-body"><p>RichTextBox supports the latest versions of Chrome, Firefox, Safari, and Microsoft Edge on both desktop and mobile devices.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Can I customize the toolbar?</summary>
+                        <div class="accordion-body"><p>Yes. Use the <code>toolbar</code> attribute to choose a preset (default, full, basic, ribbon, office) or pass a custom toolbar string with your own button layout. See the <a href="/Demos/CustomToolbar">Custom Toolbar demo</a>.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">How does image upload work?</summary>
+                        <div class="accordion-body"><p>The package includes built-in upload endpoints mapped via <code>app.MapRichTextBoxUploads()</code>. Images are uploaded to <code>wwwroot/uploads</code> by default. The gallery dialog supports folder browsing, folder creation, and file upload.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Can I use custom CSS for the editor content?</summary>
+                        <div class="accordion-body"><p>Yes. Use <code>content-css-url</code> for an external stylesheet or <code>content-css-text</code> for inline CSS rules. See the <a href="/Demos/ContentCss">Content CSS demo</a>.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Does the editor support paste from Word?</summary>
+                        <div class="accordion-body"><p>Yes. The <code>paste-mode</code> attribute supports Auto (default), Text, Word, and Disabled modes. The Word mode strips Word-specific markup while preserving essential formatting. See the <a href="/Demos/PasteWord">Paste from Word demo</a>.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Is autosave available?</summary>
+                        <div class="accordion-body"><p>Yes. Set <code>auto-save="true"</code> with <code>auto-save-key</code> and <code>auto-save-delay</code> to persist draft content in localStorage. See the <a href="/Demos/BasicAutosave">Autosave demo</a>.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Can I set content length limits?</summary>
+                        <div class="accordion-body"><p>Yes. Use <code>max-html-length</code> to limit total HTML characters or <code>max-text-length</code> to limit visible text characters.</p></div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Migration FAQ -->
+            <div>
+                <h2 class="font-['Sora'] text-2xl font-bold text-slate-950">Migration</h2>
+                <div class="mt-6 space-y-4">
+                    <details class="accordion">
+                        <summary class="accordion-header">Can I migrate from the Web Forms RichTextEditor?</summary>
+                        <div class="accordion-body"><p>Yes. The ASP.NET Core package intentionally keeps familiar concepts from the Web Forms version. The <code>office2007blue</code> skin with the ribbon toolbar provides a matching visual target. See the <a href="/Demos/Office2007Blue">Office 2007 Blue demo</a>.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Are the toolbar presets the same as Web Forms?</summary>
+                        <div class="accordion-body"><p>The Core package supports default, full, basic, ribbon, and office toolbar presets. Custom toolbar strings use the same button name syntax. The overall layout is compatible with minor differences in available commands.</p></div>
+                    </details>
+                    <details class="accordion">
+                        <summary class="accordion-header">Where do I get help with migration?</summary>
+                        <div class="accordion-body"><p>Contact <a href="mailto:support@richscripts.com">support@richscripts.com</a> for migration assistance, or review the live demos for configuration examples that match your existing Web Forms setup.</p></div>
+                    </details>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

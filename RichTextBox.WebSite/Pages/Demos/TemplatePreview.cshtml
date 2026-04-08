@@ -1,0 +1,48 @@
+@page
+@{
+    ViewData["Title"] = "Template Preview";
+    ViewData["DemoNumber"] = 44;
+    var htmlTemplatesJson = System.Text.Json.JsonSerializer.Serialize(new[]
+    {
+        new { name = "Product Showcase", html = "<div style='border:2px solid #3b82f6;border-radius:12px;overflow:hidden'><div style='background:linear-gradient(135deg,#3b82f6,#8b5cf6);padding:24px;color:#fff'><h2 style='margin:0'>Product Name</h2><p style='margin:8px 0 0;opacity:0.9'>Tagline goes here</p></div><div style='padding:20px'><p>Describe your product features and benefits in this section. Include pricing, specifications, and a call to action.</p><p><a href='#' style='display:inline-block;background:#3b82f6;color:#fff;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:600'>Get Started</a></p></div></div>" },
+        new { name = "Team Profile", html = "<div style='display:flex;gap:16px;align-items:center;padding:16px;border:1px solid #e2e8f0;border-radius:12px;background:#fff'><div style='width:80px;height:80px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:32px;color:#64748b;flex-shrink:0'>?</div><div><h3 style='margin:0 0 4px'>Team Member Name</h3><p style='margin:0 0 8px;color:#3b82f6;font-weight:600'>Job Title</p><p style='margin:0;color:#64748b;font-size:14px'>A brief bio describing the team member's role, expertise, and contributions to the organization.</p></div></div>" }
+    });
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Template Preview</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Preview template content before inserting it into the editor. The template dialog shows a preview pane for each template.</p>
+
+                    <richtextbox
+                        id="templatePreviewEditor"
+                        name="templatePreviewEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="400px"
+                        html-templates-json="@htmlTemplatesJson"
+                        html="<p>Click the Templates button to open the template dialog. Hover over or select a template to preview its content before inserting.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>@@{
+    var htmlTemplatesJson = JsonSerializer.Serialize(new[]
+    {
+        new { name = "Product Showcase", html = "&lt;div style='border:2px solid ...'&gt;...&lt;/div&gt;" },
+        new { name = "Team Profile", html = "&lt;div style='display:flex;...'&gt;...&lt;/div&gt;" }
+    });
+}
+
+&lt;richtextbox
+    name="templatePreviewEditor"
+    toolbar="full"
+    height="400px"
+    html-templates-json="@@htmlTemplatesJson" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

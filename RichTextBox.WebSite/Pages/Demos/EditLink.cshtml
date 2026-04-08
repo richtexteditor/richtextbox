@@ -1,0 +1,38 @@
+@page
+@{
+    ViewData["Title"] = "Edit Link";
+    ViewData["DemoNumber"] = 31;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Edit Link</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Modify existing hyperlinks by clicking on them to open the edit link popup, or right-click for link options.</p>
+
+                    <richtextbox
+                        id="editLinkEditor"
+                        name="editLinkEditor"
+                        toolbar="{insertlink,unlink}|{bold,italic}|{undo,redo}"
+                        width="100%"
+                        height="300px"
+                        enable-context-menu="true"
+                        context-menu-mode="Simple"
+                        html="<p>Click on <a href='https://example.com'>this link</a> to see the inline edit popup. The popup shows the URL and provides Edit, Open, and Unlink actions.</p><p>Try also: <a href='https://richtextbox.com'>RichTextBox homepage</a></p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="editLinkEditor"
+    toolbar="{insertlink,unlink}|{bold,italic}|{undo,redo}"
+    height="300px"
+    enable-context-menu="true"
+    context-menu-mode="Simple"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

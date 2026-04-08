@@ -1,0 +1,34 @@
+@page
+@{
+    ViewData["Title"] = "Image Resize";
+    ViewData["DemoNumber"] = 81;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Image Resize</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Resize images directly in the editor by dragging the resize handles that appear when an image is selected.</p>
+
+                    <richtextbox
+                        id="imageResizeEditor"
+                        name="imageResizeEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="300px"
+                        html="<p>Click the image below to select it, then drag the corner handles to resize:</p><p><img src='/images/Intel.svg' alt='Sample' style='width:200px;height:auto' /></p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="imageResizeEditor"
+    toolbar="full"
+    height="300px"
+    html="&lt;p&gt;&lt;img src='/images/Intel.svg' style='width:200px;height:auto' /&gt;&lt;/p&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

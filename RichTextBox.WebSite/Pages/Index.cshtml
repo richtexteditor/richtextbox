@@ -1,0 +1,249 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Rich Text Editor for ASP.NET Core";
+}
+
+<!-- Hero -->
+<section class="relative overflow-hidden">
+    <div class="mx-auto max-w-screen-2xl px-4 pb-16 pt-14 text-center sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600 shadow-sm">
+            <span class="h-2 w-2 rounded-full bg-[#0f8b8d]"></span>
+            ASP.NET Core WYSIWYG Editor
+        </div>
+        <h1 class="mx-auto mt-8 max-w-4xl font-['Sora'] text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl xl:text-6xl">
+            The production&#8209;ready rich text editor for
+            <span class="text-[#0f8b8d]">every use case</span>
+        </h1>
+        <p class="mx-auto mt-7 max-w-2xl text-lg leading-8 text-slate-600">
+            A comprehensive WYSIWYG editor with unmatched reliability, clean HTML output, image upload,
+            and a full suite of customizable features — built for ASP.NET Core teams.
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+            <a asp-page="/Download" class="inline-flex items-center rounded-full bg-[#0f8b8d] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5 hover:text-white">Download Free Trial</a>
+            <a asp-page="/Demos" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900">Open Live Demos</a>
+        </div>
+    </div>
+</section>
+
+<!-- Trusted By -->
+<section class="border-y border-slate-200/60 bg-slate-50/50 py-8">
+    <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Trusted by 25,000+ customers worldwide</p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-10 opacity-50 grayscale transition hover:opacity-80 hover:grayscale-0 lg:gap-16">
+            <img src="~/images/Sony_logo.svg" alt="Sony" class="h-7" />
+            <img src="~/images/Intel.svg" alt="Intel" class="h-7" />
+            <img src="~/images/Nokia.svg" alt="Nokia" class="h-7" />
+            <img src="~/images/Siemens.svg" alt="Siemens" class="h-7" />
+            <img src="~/images/ibm.svg" alt="IBM" class="h-7" />
+            <img src="~/images/microsoft.svg" alt="Microsoft" class="h-7" />
+        </div>
+    </div>
+</section>
+
+<!-- Feature Showcase -->
+<section class="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <div class="text-center">
+        <p class="font-['Sora'] text-xs font-semibold uppercase tracking-[0.28em] text-[#0f8b8d]">Capabilities</p>
+        <h2 class="mx-auto mt-4 max-w-3xl font-['Sora'] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Components for cutting&#8209;edge content creation</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">From editing to embedding, everything you need in one production-grade editor.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <a asp-page="/Features" class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg no-underline">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            </div>
+            <h3 class="mt-4 font-['Sora'] text-lg font-semibold text-slate-950 group-hover:text-[#0f8b8d]">Core Editing</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Rich formatting, lists, tables, links, and clean HTML output with precise styling tools.</p>
+        </a>
+
+        <a asp-page="/Features" class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg no-underline">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            </div>
+            <h3 class="mt-4 font-['Sora'] text-lg font-semibold text-slate-950 group-hover:text-[#0f8b8d]">Image &amp; Media</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Upload images, browse galleries, insert videos, and manage media with folder-aware endpoints.</p>
+        </a>
+
+        <a asp-page="/Features" class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg no-underline">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </div>
+            <h3 class="mt-4 font-['Sora'] text-lg font-semibold text-slate-950 group-hover:text-[#0f8b8d]">Templates &amp; Content</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Pre-built HTML templates, special characters, code insertion, and content snippets for faster authoring.</p>
+        </a>
+
+        <a asp-page="/Features" class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg no-underline">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            </div>
+            <h3 class="mt-4 font-['Sora'] text-lg font-semibold text-slate-950 group-hover:text-[#0f8b8d]">Responsive Design</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Works across desktops, tablets, and phones with consistent behavior and responsive toolbar layout.</p>
+        </a>
+
+        <a asp-page="/Features" class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg no-underline">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            </div>
+            <h3 class="mt-4 font-['Sora'] text-lg font-semibold text-slate-950 group-hover:text-[#0f8b8d]">Clean HTML Output</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Outputs well-formed XHTML 1.0 or HTML 5. Paste from Word and Excel without losing formatting.</p>
+        </a>
+
+        <a asp-page="/Features" class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg no-underline">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            </div>
+            <h3 class="mt-4 font-['Sora'] text-lg font-semibold text-slate-950 group-hover:text-[#0f8b8d]">Customization</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Multiple toolbar presets, skins, resize modes, context menus, and extensible plugin architecture.</p>
+        </a>
+    </div>
+</section>
+
+<!-- Code Sample + Integration -->
+<section class="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+    <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+            <p class="font-['Sora'] text-xs font-semibold uppercase tracking-[0.28em] text-[#0f8b8d]">Drop-in Tag Helper</p>
+            <h2 class="mt-4 font-['Sora'] text-3xl font-bold tracking-tight text-slate-950">Add a rich text editor in minutes</h2>
+            <p class="mt-4 max-w-xl text-base leading-7 text-slate-600">
+                The ASP.NET Core wrapper packages the editor as a Razor Tag Helper. Add it to any form,
+                map the upload endpoint, and your users get a familiar word-like editing surface.
+            </p>
+            <ul class="mt-8 space-y-4">
+                <li class="flex items-start gap-3">
+                    <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </span>
+                    <span class="text-sm leading-6 text-slate-700">Works with Razor Pages and MVC — familiar Web Forms concepts preserved.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </span>
+                    <span class="text-sm leading-6 text-slate-700">Built-in upload endpoint with folder-aware image gallery.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </span>
+                    <span class="text-sm leading-6 text-slate-700">Forms receive clean HTML back on submit — no extra JavaScript required.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#0f8b8d]/10 text-[#0f8b8d]">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </span>
+                    <span class="text-sm leading-6 text-slate-700">Toolbar presets, skins, resize modes — all configurable via Tag Helper attributes.</span>
+                </li>
+            </ul>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a asp-page="/Demos" class="inline-flex items-center rounded-full bg-[#0f8b8d] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5 hover:text-white">Try demo</a>
+                <a asp-page="/Download" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400">Download package</a>
+            </div>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-950 p-6 shadow-xl">
+            <div class="flex items-center gap-2 pb-4">
+                <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-yellow-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-green-400/80"></span>
+                <span class="ml-4 text-xs text-slate-500">MyPage.cshtml</span>
+            </div>
+            <pre class="overflow-x-auto text-sm leading-7 text-slate-300"><code><span class="text-slate-500">@@page</span>
+<span class="text-slate-500">@@model</span> <span class="text-blue-300">MyPageModel</span>
+
+<span class="text-pink-300">&lt;form</span> <span class="text-sky-300">method</span>=<span class="text-amber-300">"post"</span><span class="text-pink-300">&gt;</span>
+    <span class="text-pink-300">&lt;richtextbox</span>
+        <span class="text-sky-300">asp-for</span>=<span class="text-amber-300">"Body"</span>
+        <span class="text-sky-300">toolbar</span>=<span class="text-amber-300">"full"</span>
+        <span class="text-sky-300">skin</span>=<span class="text-amber-300">"gray"</span>
+        <span class="text-sky-300">height</span>=<span class="text-amber-300">"540px"</span> <span class="text-pink-300">/&gt;</span>
+    <span class="text-pink-300">&lt;button</span> <span class="text-sky-300">type</span>=<span class="text-amber-300">"submit"</span><span class="text-pink-300">&gt;</span>Save<span class="text-pink-300">&lt;/button&gt;</span>
+<span class="text-pink-300">&lt;/form&gt;</span></code></pre>
+        </div>
+    </div>
+</section>
+
+<!-- Why RichTextEditor -->
+<section class="border-y border-slate-200/60 bg-slate-50/40 py-16 lg:py-24">
+    <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <p class="font-['Sora'] text-xs font-semibold uppercase tracking-[0.28em] text-[#0f8b8d]">Why RichTextBox?</p>
+            <h2 class="mx-auto mt-4 max-w-3xl font-['Sora'] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">25,000+ customers have already trusted us</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
+                This gives us a solid foundation on which we develop content editing solutions for any use case.
+            </p>
+        </div>
+        <div class="mt-14 grid gap-6 md:grid-cols-3">
+            <article class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <h3 class="mt-5 font-['Sora'] text-xl font-semibold text-slate-950">Quality</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                    Crafted to perfection over 21+ years of development. Clean, compact, and extremely fast-loading editor with well-formed HTML output.
+                </p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <h3 class="mt-5 font-['Sora'] text-xl font-semibold text-slate-950">Experience</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                    21+ years of experience in rich text editing. 25,000+ customers in 60+ countries. Cross-browser support on desktops, tablets, and phones.
+                </p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.22C21 6.73 16.74 3 12 3c-4.69 0-9 3.65-9 9.28-.6.34-1 .98-1 1.72v2c0 1.1.9 2 2 2h1v-6.1c0-3.87 3.13-7 7-7s7 3.13 7 7V19h-8v2h8c1.1 0 2-.9 2-2v-1.22c.59-.31 1-.92 1-1.64v-2.3c0-.7-.41-1.31-1-1.62z"/></svg>
+                </div>
+                <h3 class="mt-5 font-['Sora'] text-xl font-semibold text-slate-950">Support</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                    Comprehensive documentation, responsive technical support, and a proven track record of helping teams ship content-rich applications.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <div class="text-center">
+        <p class="font-['Sora'] text-xs font-semibold uppercase tracking-[0.28em] text-[#0f8b8d]">RichTextBox in numbers</p>
+    </div>
+    <div class="mt-10 grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-5">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p class="font-['Sora'] text-3xl font-bold text-slate-950">25,000+</p>
+            <p class="mt-1 text-sm text-slate-500">customers</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p class="font-['Sora'] text-3xl font-bold text-slate-950">60+</p>
+            <p class="mt-1 text-sm text-slate-500">countries</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p class="font-['Sora'] text-3xl font-bold text-slate-950">23</p>
+            <p class="mt-1 text-sm text-slate-500">languages</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p class="font-['Sora'] text-3xl font-bold text-slate-950">21+</p>
+            <p class="mt-1 text-sm text-slate-500">years</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p class="font-['Sora'] text-3xl font-bold text-slate-950">.NET 8+</p>
+            <p class="mt-1 text-sm text-slate-500">ASP.NET Core</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <div class="rounded-3xl border border-slate-200 bg-gradient-to-br from-[#0f8b8d]/5 via-white to-amber-50/30 p-10 text-center shadow-sm lg:p-16">
+        <h2 class="font-['Sora'] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Ready to get started?</h2>
+        <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-600">
+            Download the free trial and add a production-ready WYSIWYG editor to your ASP.NET Core application in minutes.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a asp-page="/Download" class="inline-flex items-center rounded-full bg-[#0f8b8d] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5 hover:text-white">Download Free Trial</a>
+            <a asp-page="/Pricing" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 transition hover:border-slate-400">See pricing</a>
+        </div>
+    </div>
+</section>

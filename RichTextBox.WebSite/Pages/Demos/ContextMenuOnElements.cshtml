@@ -1,0 +1,25 @@
+@page
+@{
+    ViewData["Title"] = "Context-Sensitive Menu";
+    ViewData["DemoNumber"] = 47;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Context-Sensitive Menu</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">The context menu adapts its options based on the element under the cursor — tables show table operations, links show link actions, images show image tools.</p>
+                    <richtextbox name="contextMenuElementsEditor" toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}" height="400px" enable-context-menu="true" context-menu-mode="Default" html="<p>Right-click on different elements below to see context-sensitive menus.</p><table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;width:60%'><tr><th>Name</th><th>Role</th></tr><tr><td>Alice</td><td>Developer</td></tr><tr><td>Bob</td><td>Designer</td></tr></table><p>Visit <a href='https://www.example.com'>Example Website</a> for more information.</p><p>This is sample text — right-click here for default text options.</p>"></richtextbox>
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="full" height="400px"
+    enable-context-menu="true"
+    context-menu-mode="Default"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

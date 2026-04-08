@@ -1,0 +1,34 @@
+@page
+@{
+    ViewData["Title"] = "Insert Document";
+    ViewData["DemoNumber"] = 36;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Insert Document</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Attach downloadable files using the insert document dialog.</p>
+
+                    <richtextbox
+                        id="documentInsertEditor"
+                        name="documentInsertEditor"
+                        toolbar="{insertdocument}|{bold,italic}|{undo,redo}"
+                        width="100%"
+                        height="300px"
+                        html="<p>Use the document button to attach files like PDFs, Word documents, or ZIP archives as downloadable links within the content.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="documentInsertEditor"
+    toolbar="{insertdocument}|{bold,italic}|{undo,redo}"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

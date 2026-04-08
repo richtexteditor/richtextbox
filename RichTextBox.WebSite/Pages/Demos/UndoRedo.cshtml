@@ -1,0 +1,41 @@
+@page
+@{
+    ViewData["Title"] = "Undo & Redo";
+    ViewData["DemoNumber"] = 100;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Undo &amp; Redo</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Use the undo and redo toolbar buttons or keyboard shortcuts (Ctrl+Z / Ctrl+Y) to step backward and forward through your editing history. The editor maintains a full history stack of changes.</p>
+
+                    <richtextbox
+                        id="undoRedoEditor"
+                        name="undoRedoEditor"
+                        toolbar="{undo,redo}|{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="300px"
+                        html="<h3>Try Editing This Content</h3><p>Make some changes to this text, then use the <strong>Undo</strong> and <strong>Redo</strong> buttons in the toolbar to navigate through your edit history. You can also use <kbd>Ctrl+Z</kbd> to undo and <kbd>Ctrl+Y</kbd> to redo.</p><p>Try these steps:</p><ol><li>Delete this paragraph</li><li>Click Undo to bring it back</li><li>Click Redo to delete it again</li></ol>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">The undo and redo buttons are placed at the start of the toolbar in this demo to highlight them. Keyboard shortcuts Ctrl+Z and Ctrl+Y work regardless of toolbar position.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="undoRedoEditor"
+    toolbar="{undo,redo}|{bold,italic,underline} ..."
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

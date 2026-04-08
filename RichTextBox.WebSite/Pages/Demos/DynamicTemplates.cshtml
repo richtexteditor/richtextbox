@@ -1,0 +1,58 @@
+@page
+@{
+    ViewData["Title"] = "Dynamic Templates";
+    ViewData["DemoNumber"] = 43;
+
+    // Simulate loading templates from a database or configuration
+    var templates = new List<object>();
+    var templateNames = new[] { "Invoice", "Receipt", "Shipping Label" };
+    foreach (var name in templateNames)
+    {
+        templates.Add(new { name = name, html = $"<h2>{name}</h2><p>This is the <strong>{name}</strong> template loaded dynamically from server-side data.</p><p>Template fields and content can be pulled from a database, configuration file, or external API.</p>" });
+    }
+    var htmlTemplatesJson = System.Text.Json.JsonSerializer.Serialize(templates);
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Dynamic Templates</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Load templates from server-side data using Razor code to build the JSON. Templates can be pulled from a database or configuration.</p>
+
+                    <richtextbox
+                        id="dynamicTemplatesEditor"
+                        name="dynamicTemplatesEditor"
+                        toolbar="{bold,italic,underline,linethrough,superscript,subscript}|{forecolor,backcolor}|{justifyleft,justifycenter,justifyright,justifyfull}|{insertorderedlist,insertunorderedlist,multilevellist,inserttodolist,indent,outdent} #{paragraphs:toggle,fontname:toggle,fontsize:toggle,inlinestyle,lineheight,casechange}|{undo,redo} / {formatpainter,removeformat,cut,copy,paste,delete,find}|{insertlink,unlink,insertblockquote,insertemoji,insertchars}|{inserttable,insertbookmark,insertimage,insertgallery,insertvideo,insertdocument,inserttemplate,insertcode} #{preview,code,selectall}|{importword,exportword,exportpdf} / {insertcomment,trackchanges,insertmention}|{spellcheck,autoformatting,toggleborder}|{paragraphstyle,toggle_paragraphop,menu_paragraphop} #{insertmergefield,insertfootnote,inserttoc,insertpagebreak,revisionhistory}|{fullscreenenter,fullscreenexit,togglemore}"
+                        width="100%"
+                        height="400px"
+                        html-templates-json="@htmlTemplatesJson"
+                        html="<p>The templates in this editor are built dynamically from server-side C# code. Click the Templates button to browse them.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>@@{
+    var templates = new List&lt;object&gt;();
+    var templateNames = new[] { "Invoice", "Receipt", "Shipping Label" };
+    foreach (var name in templateNames)
+    {
+        templates.Add(new
+        {
+            name = name,
+            html = $"&lt;h2&gt;{name}&lt;/h2&gt;&lt;p&gt;Dynamic content...&lt;/p&gt;"
+        });
+    }
+    var htmlTemplatesJson = JsonSerializer.Serialize(templates);
+}
+
+&lt;richtextbox
+    name="dynamicTemplatesEditor"
+    toolbar="full"
+    height="400px"
+    html-templates-json="@@htmlTemplatesJson" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

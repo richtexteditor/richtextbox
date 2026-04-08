@@ -1,0 +1,47 @@
+@page
+@{
+    ViewData["Title"] = "Upload Endpoint";
+    ViewData["DemoNumber"] = 86;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Upload Endpoint</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Configure the upload endpoint using MapRichTextBoxUploads() in Program.cs. The endpoint handles image uploads and gallery browsing.</p>
+
+                    <richtextbox
+                        id="uploadEndpointEditor"
+                        name="uploadEndpointEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<p>This editor connects to the upload endpoint configured in Program.cs via app.MapRichTextBoxUploads(). The endpoint handles image uploads and gallery folder browsing.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>// Program.cs
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddRazorPages();
+
+var app = builder.Build();
+app.UseStaticFiles();
+app.MapRazorPages();
+
+// Map the RichTextBox upload endpoint
+app.MapRichTextBoxUploads();
+
+app.Run();
+
+// Razor Page
+&lt;richtextbox
+    name="uploadEndpointEditor"
+    toolbar="default"
+    height="300px" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

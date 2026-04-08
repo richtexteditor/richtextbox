@@ -1,0 +1,41 @@
+@page
+@{
+    ViewData["Title"] = "Text Color";
+    ViewData["DemoNumber"] = 14;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Text Color</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Apply foreground color to selected text to draw attention, indicate status, or reinforce visual hierarchy. The toolbar color picker lets you choose from preset swatches or enter a custom value.</p>
+
+                    <richtextbox
+                        id="textColorEditor"
+                        name="textColorEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<h2>Sprint Status Report</h2><p><strong>Sprint 14</strong> &mdash; April 1 &ndash; April 14, 2026</p><h3>Story Status</h3><ul><li><span style='color:#16a34a'><strong>Completed:</strong></span> User authentication flow, password reset page, session timeout handling</li><li><span style='color:#2563eb'><strong>In Progress:</strong></span> Dashboard analytics widgets, CSV export feature</li><li><span style='color:#dc2626'><strong>Blocked:</strong></span> Payment gateway integration &mdash; awaiting API credentials from the vendor</li></ul><h3>Notes</h3><p>Overall velocity is on track. The <span style='color:#dc2626'>blocked payment task</span> is the primary risk item. If credentials are not received by <span style='color:#ca8a04'>April 10</span>, we will need to descope it from this sprint and carry it forward.</p><p>Next planning session is scheduled for <span style='color:#2563eb'>Monday at 10:00 AM</span>.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">The color picker supports both preset swatches and custom hex color input.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="textColorEditor"
+    toolbar="default"
+    height="300px"
+    html="&lt;p&gt;Select text and choose a &lt;span style='color:#ff0000'&gt;foreground color&lt;/span&gt; from the &lt;span style='color:#0000ff'&gt;color picker&lt;/span&gt;.&lt;/p&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

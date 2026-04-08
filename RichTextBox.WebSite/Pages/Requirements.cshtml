@@ -1,0 +1,93 @@
+@page
+@{
+    ViewData["Title"] = "System Requirements";
+}
+
+<!-- Hero -->
+<section class="relative overflow-hidden border-b border-slate-200/60">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(8,145,178,0.12),transparent_24rem),radial-gradient(circle_at_80%_20%,rgba(251,191,36,0.10),transparent_20rem)]"></div>
+    <div class="relative mx-auto w-full max-w-screen-2xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-24">
+        <span class="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5 text-sm font-semibold text-cyan-800">
+            Compatibility guide
+        </span>
+        <h1 class="mx-auto mt-6 max-w-4xl font-['Sora'] text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            System Requirements
+        </h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+            Server-side and browser requirements for running RichTextBox in production.
+        </p>
+    </div>
+</section>
+
+<section class="border-b border-slate-200/60">
+    <div class="mx-auto w-full max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div class="mx-auto max-w-4xl space-y-8">
+
+            <!-- Server -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Server</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">Server-Side Requirements</h2>
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="py-3 pr-4 font-['Sora'] font-semibold text-slate-900">Requirement</th>
+                                <th class="py-3 font-['Sora'] font-semibold text-slate-900">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Runtime</td><td class="py-3">ASP.NET Core 8.0 or later</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">SDK</td><td class="py-3">.NET 8 SDK or later</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Operating System</td><td class="py-3">Windows, Linux, or macOS</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Web Server</td><td class="py-3">Kestrel (default), IIS, nginx reverse proxy, or Azure App Service</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Disk Space</td><td class="py-3">~5 MB for the NuGet package static assets</td></tr>
+                            <tr><td class="py-3 pr-4 font-medium text-slate-900">License</td><td class="py-3"><code>RichTextBox.lic</code> in the content root directory</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Browser -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Browser</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">Browser Support</h2>
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="py-3 pr-4 font-['Sora'] font-semibold text-slate-900">Browser</th>
+                                <th class="py-3 pr-4 font-['Sora'] font-semibold text-slate-900">Desktop</th>
+                                <th class="py-3 font-['Sora'] font-semibold text-slate-900">Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Google Chrome</td><td class="py-3 pr-4">Latest 2 versions</td><td class="py-3">Latest 2 versions</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Mozilla Firefox</td><td class="py-3 pr-4">Latest 2 versions</td><td class="py-3">Latest 2 versions</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-3 pr-4 font-medium text-slate-900">Apple Safari</td><td class="py-3 pr-4">Latest 2 versions</td><td class="py-3">Latest 2 versions (iOS)</td></tr>
+                            <tr><td class="py-3 pr-4 font-medium text-slate-900">Microsoft Edge</td><td class="py-3 pr-4">Latest 2 versions</td><td class="py-3">Latest 2 versions</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Browser APIs -->
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-sm">
+                <p class="font-['Sora'] text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">APIs</p>
+                <h2 class="mt-3 font-['Sora'] text-2xl font-bold text-slate-950">Browser APIs Used</h2>
+                <p class="mt-4 text-base leading-7 text-slate-600">The editor relies on standard web platform APIs supported by all modern browsers:</p>
+                <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">contentEditable</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">document.execCommand</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">Selection API</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">Clipboard API</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">Drag and Drop API</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">File API</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">XMLHttpRequest</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">localStorage</div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-sm text-slate-700">iframe sandboxing</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

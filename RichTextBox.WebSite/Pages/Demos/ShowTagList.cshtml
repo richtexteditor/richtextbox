@@ -1,0 +1,36 @@
+@page
+@{
+    ViewData["Title"] = "Tag Path Navigation";
+    ViewData["DemoNumber"] = 74;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Tag Path Navigation</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Shows the HTML tag path at the bottom of the editor. Click any tag in the path to select that element.</p>
+
+                    <richtextbox
+                        id="showTagListEditor"
+                        name="showTagListEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        show-tag-list="true"
+                        html="<div><p>Click inside this <strong>bold <em>italic</em> text</strong> to see the tag path in the bottom bar: BODY &gt; DIV &gt; P &gt; STRONG &gt; EM</p></div>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="showTagListEditor"
+    toolbar="default"
+    height="300px"
+    show-tag-list="true"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

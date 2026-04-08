@@ -1,0 +1,26 @@
+@page
+@{
+    ViewData["Title"] = "No Resize";
+    ViewData["DemoNumber"] = 67;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">No Resize</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Disable resizing entirely to lock the editor at fixed dimensions. The resize handle is hidden.</p>
+                    <richtextbox name="noResizeEditor" toolbar="default" height="300px" width="100%" resize-mode="none" html="<p>This editor has a fixed size and cannot be resized by the user. The resize handle is hidden.</p>"></richtextbox>
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="default"
+    height="300px"
+    width="100%"
+    resize-mode="none"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

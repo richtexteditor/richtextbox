@@ -1,0 +1,59 @@
+@page
+@{
+    ViewData["Title"] = "Enter Key Tag";
+    ViewData["DemoNumber"] = 89;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Enter Key Tag</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Control what HTML tag is generated when the user presses Enter. Options are p (paragraph), div, or br (line break).</p>
+
+                    <h4 style="margin-bottom:8px">enter-key-tag="p" (default — paragraph)</h4>
+                    <richtextbox
+                        id="enterKeyP"
+                        name="enterKeyP"
+                        toolbar="basic"
+                        width="100%"
+                        height="150px"
+                        enter-key-tag="p"
+                        html="<p>Press Enter here to create a new paragraph tag.</p>"></richtextbox>
+
+                    <h4 style="margin-top:24px;margin-bottom:8px">enter-key-tag="div"</h4>
+                    <richtextbox
+                        id="enterKeyDiv"
+                        name="enterKeyDiv"
+                        toolbar="basic"
+                        width="100%"
+                        height="150px"
+                        enter-key-tag="div"
+                        html="<div>Press Enter here to create a new div tag.</div>"></richtextbox>
+
+                    <h4 style="margin-top:24px;margin-bottom:8px">enter-key-tag="br"</h4>
+                    <richtextbox
+                        id="enterKeyBr"
+                        name="enterKeyBr"
+                        toolbar="basic"
+                        width="100%"
+                        height="150px"
+                        enter-key-tag="br"
+                        html="<p>Press Enter here to insert a br line break.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox name="enterKeyP"
+    toolbar="basic" enter-key-tag="p" height="150px" /&gt;
+
+&lt;richtextbox name="enterKeyDiv"
+    toolbar="basic" enter-key-tag="div" height="150px" /&gt;
+
+&lt;richtextbox name="enterKeyBr"
+    toolbar="basic" enter-key-tag="br" height="150px" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

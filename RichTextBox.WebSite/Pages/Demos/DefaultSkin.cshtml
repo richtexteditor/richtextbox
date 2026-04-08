@@ -1,0 +1,33 @@
+@page
+@{
+    ViewData["Title"] = "Default Skin";
+    ViewData["DemoNumber"] = 48;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Default Skin</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">The default skin provides a clean, modern appearance with neutral borders and minimal chrome. It blends naturally into most application layouts without additional customization.</p>
+                    <richtextbox name="defaultSkinEditor" toolbar="default" skin="default" height="300px" html="<h2>Quarterly Design Review</h2><p>The design system update for Q2 introduces several refinements to our component library. Below is a summary of the key changes approved by the review board.</p><h3>Typography</h3><p>Body text now uses a <strong>16px base size</strong> with a 1.6 line-height ratio. Heading scales follow a modular ratio of 1.25, ensuring consistent visual hierarchy across all page templates.</p><h3>Color Palette</h3><p>The primary brand blue has been adjusted to <span style='color:#2563eb'>#2563EB</span> for improved contrast on light backgrounds. Secondary accent colors remain unchanged. All interactive elements must meet a minimum <em>4.5:1 contrast ratio</em> per WCAG guidelines.</p><h3>Spacing</h3><ul><li>Component padding increased from 12px to 16px</li><li>Section margins standardized to 32px vertical gaps</li><li>Card border-radius updated to 8px globally</li></ul><p>The full design token file is available in the shared repository.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Available skins include default, office2007blue, office2007silver, office2007black, office2010blue, office2010silver, and rounded-corner. Set the skin attribute to switch themes.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="default"
+    skin="default"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

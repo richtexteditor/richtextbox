@@ -1,0 +1,37 @@
+@page
+@{
+    ViewData["Title"] = "Image Upload";
+    ViewData["DemoNumber"] = 75;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Image Upload</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Upload images through the gallery dialog. Images are saved to the server via the MapRichTextBoxUploads() endpoint.</p>
+
+                    <richtextbox
+                        id="imageUploadEditor"
+                        name="imageUploadEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<p>Open the image gallery from the toolbar to upload images. Files are uploaded to wwwroot/uploads on the server.</p>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="imageUploadEditor"
+    toolbar="default"
+    height="300px"
+    html="..." /&gt;
+
+// Program.cs
+app.MapRichTextBoxUploads();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

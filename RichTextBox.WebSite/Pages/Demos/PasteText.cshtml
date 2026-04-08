@@ -1,0 +1,25 @@
+@page
+@{
+    ViewData["Title"] = "Paste as Text";
+    ViewData["DemoNumber"] = 61;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Paste as Text</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Strip all formatting from pasted content and insert it as plain text. Useful when you want a clean, consistent style regardless of the source.</p>
+                    <richtextbox name="pasteTextEditor" toolbar="default" height="300px" paste-mode="Text" html="<p>Paste any formatted content here — all styling will be stripped and only plain text will be inserted.</p>"></richtextbox>
+                    <div class="code-panel">
+<pre><code>&lt;richtextbox toolbar="default"
+    height="300px"
+    paste-mode="Text"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

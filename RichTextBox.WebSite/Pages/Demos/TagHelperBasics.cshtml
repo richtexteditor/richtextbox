@@ -1,0 +1,52 @@
+@page
+@{
+    ViewData["Title"] = "Tag Helper Basics";
+    ViewData["DemoNumber"] = 4;
+    var postedBody = Request.HasFormContentType ? Request.Form["Body"].ToString() : null;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Tag Helper Basics</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Submit editor HTML content through a standard Razor Pages form POST. The posted HTML is displayed below after submission.</p>
+
+                    <form method="post">
+                        <richtextbox
+                            id="tagHelperEditor"
+                            name="Body"
+                            toolbar="default"
+                            width="100%"
+                            height="300px"
+                            html="<p>Edit this content and click Submit to post the HTML to the server.</p>"></richtextbox>
+
+                        <div class="mt-3">
+                            <button type="submit" class="inline-flex items-center rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700">Submit</button>
+                        </div>
+                    </form>
+
+                    @if (!string.IsNullOrEmpty(postedBody))
+                    {
+                        <div style="margin-top:16px;padding:12px;border:1px solid #ccc;border-radius:4px;background:#f9f9f9">
+                            <strong>Posted HTML:</strong>
+                            <pre style="white-space:pre-wrap">@postedBody</pre>
+                        </div>
+                    }
+
+                    <div class="code-panel">
+                        <pre><code>&lt;form method="post"&gt;
+    &lt;richtextbox
+        name="Body"
+        toolbar="default"
+        height="300px"
+        html="..." /&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

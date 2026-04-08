@@ -1,0 +1,36 @@
+@page
+@{
+    ViewData["Title"] = "Initial Content";
+    ViewData["DemoNumber"] = 88;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Initial Content</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Set the editor's initial HTML content using the html attribute on the tag helper.</p>
+
+                    <richtextbox
+                        id="initialContentEditor"
+                        name="initialContentEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<h2>Pre-loaded Content</h2><p>This content was set via the <code>html</code> attribute on the richtextbox tag helper. It loads when the editor initializes.</p><ul><li>Supports any valid HTML</li><li>Including tables, images, and links</li></ul>"></richtextbox>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="initialContentEditor"
+    toolbar="default"
+    height="300px"
+    html="&lt;h2&gt;Pre-loaded Content&lt;/h2&gt;
+          &lt;p&gt;This content was set via the html attribute.&lt;/p&gt;
+          &lt;ul&gt;&lt;li&gt;Supports any valid HTML&lt;/li&gt;&lt;/ul&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

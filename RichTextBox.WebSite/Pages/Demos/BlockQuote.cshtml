@@ -1,0 +1,41 @@
+@page
+@{
+    ViewData["Title"] = "Block Quote";
+    ViewData["DemoNumber"] = 25;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Block Quote</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Wrap selected text in a blockquote element to visually distinguish quotations, excerpts, and callouts from the surrounding content. Blockquotes can be nested for multi-level citations.</p>
+
+                    <richtextbox
+                        id="blockquoteEditor"
+                        name="blockquoteEditor"
+                        toolbar="{insertblockquote,indent,outdent}|{bold,italic}|{undo,redo}"
+                        width="100%"
+                        height="300px"
+                        html="<h2>On the Value of Simplicity</h2><p>Great thinkers across centuries have returned to the same idea: clarity and simplicity are not limitations but strengths. In design, in writing, and in engineering, removing the unnecessary reveals what truly matters.</p><blockquote><p><em>Simplicity is the ultimate sophistication.</em></p><p>&mdash; Leonardo da Vinci</p></blockquote><p>This principle applies directly to software development. A clean interface with fewer controls often outperforms a crowded one, because users can find what they need without hesitation.</p><blockquote><p><em>Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.</em></p><p>&mdash; Antoine de Saint-Exup&eacute;ry</p></blockquote><p>When building rich text editors, consider which formatting tools your users actually need. A focused toolbar is almost always better than an exhaustive one.</p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Block quotes are rendered as HTML blockquote elements. Nest quotes by applying the blockquote command multiple times.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="blockquoteEditor"
+    toolbar="{insertblockquote,indent,outdent}|{bold,italic}|{undo,redo}"
+    height="300px"
+    html="..." /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

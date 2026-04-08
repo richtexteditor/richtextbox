@@ -1,0 +1,41 @@
+@page
+@{
+    ViewData["Title"] = "Font Size";
+    ViewData["DemoNumber"] = 13;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Font Size</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">Adjust the font size of selected text using the size dropdown in the toolbar. Use larger sizes for headings and titles, and smaller sizes for captions and fine print.</p>
+
+                    <richtextbox
+                        id="fontSizeEditor"
+                        name="fontSizeEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        html="<p><span style='font-size:28px'><strong>Annual Report 2026</strong></span></p><p><span style='font-size:18px'>Executive Summary</span></p><p><span style='font-size:14px'>Revenue grew 12% year-over-year, driven by strong performance in the enterprise segment. Operating margins improved to 18.4%, reflecting cost optimization initiatives launched in Q1. The company added 340 new enterprise accounts during the fiscal year.</span></p><p><span style='font-size:18px'>Key Metrics</span></p><p><span style='font-size:14px'>Total revenue reached $48.2M, up from $43.0M in the prior year. Customer retention rate held steady at 94%. The average deal size for new enterprise contracts increased by 8% to $125,000.</span></p><p><span style='font-size:10px'>This document is confidential. Distribution is limited to board members and senior leadership.</span></p>"></richtextbox>
+
+                    <div class="demo-note">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Note</div>
+                            <p class="demo-note-text">Font sizes range from 8pt to 72pt. The default body text is typically 12pt or 14pt.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-panel">
+                        <pre><code>&lt;richtextbox
+    name="fontSizeEditor"
+    toolbar="default"
+    height="300px"
+    html="&lt;p&gt;&lt;span style='font-size:12px'&gt;12px&lt;/span&gt; &lt;span style='font-size:24px'&gt;24px&lt;/span&gt; &lt;span style='font-size:36px'&gt;36px&lt;/span&gt;&lt;/p&gt;" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
