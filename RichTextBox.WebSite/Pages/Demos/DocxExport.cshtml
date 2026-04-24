@@ -1,0 +1,183 @@
+@page
+@{
+    ViewData["Title"] = "DOCX Export";
+    ViewData["DemoNumber"] = 105;
+}
+<style>
+    .docx-two-col {
+        display: grid; gap: 18px;
+        grid-template-columns: 1fr;
+    }
+    @@media (min-width: 1024px) {
+        .docx-two-col { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; }
+    }
+    .docx-side {
+        border: 1px solid #e2e8f0; border-radius: 14px; background: #fff;
+        padding: 18px;
+    }
+    .docx-side h4 { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; color: #0f172a; margin-bottom: 6px; }
+    .docx-side p, .docx-side li { font-size: 12.5px; color: #475569; line-height: 1.55; }
+    .docx-pill {
+        display: inline-flex; align-items: center;
+        background: #ecfccb; color: #3f6212;
+        padding: 3px 9px; border-radius: 999px;
+        font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .docx-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 10px 18px; border-radius: 999px;
+        background: #0f172a; color: #fff !important;
+        font-size: 13px; font-weight: 600;
+        border: 0; cursor: pointer;
+        transition: transform .12s, background .12s;
+    }
+    .docx-btn:hover { background: #1e293b; transform: translateY(-1px); }
+    .docx-btn[disabled] { opacity: .5; pointer-events: none; }
+    .docx-btn-secondary {
+        background: #fff; color: #0f172a !important;
+        border: 1px solid #e2e8f0;
+    }
+    .docx-status {
+        font-size: 12px; color: #64748b; margin-top: 8px;
+        font-family: Consolas, "SF Mono", Menlo, monospace;
+    }
+    .docx-status.ok { color: #166534; }
+    .docx-status.err { color: #991b1b; }
+    .code-block {
+        margin: 10px 0; padding: 12px 14px; border-radius: 10px;
+        background: #0b1220; color: #e2e8f0;
+        font: 500 12px/1.65 Consolas, "SF Mono", Menlo, monospace;
+        overflow-x: auto;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #7dd3fc; }
+    .code-block .cmt { color: #64748b; font-style: italic; }
+</style>
+
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    DOCX Export
+                    <span class="docx-pill">New in preview.11</span>
+                </div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Convert the editor's HTML to a Microsoft Word <code>.docx</code> file server-side and stream it back as a
+                        download. Built on MIT-licensed <code>DocumentFormat.OpenXml</code> &mdash; no external service, no cloud API,
+                        no DOCX SaaS subscription to wire up.
+                    </p>
+
+                    <div class="docx-two-col mt-4">
+                        <div>
+                            <richtextbox id="DocxEditor" name="Body" toolbar="default"
+                                         height="460px"
+                                         initial-content='&lt;h1&gt;Quarterly update&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Summary.&lt;/strong&gt; Revenue grew &lt;em&gt;15%&lt;/em&gt; year-over-year, with &lt;u&gt;enterprise&lt;/u&gt; leading the mix.&lt;/p&gt;&lt;h2&gt;Highlights&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Two new enterprise customers closed in March.&lt;/li&gt;&lt;li&gt;Product parity reached with TinyMCE 7 and CKEditor 5 on the collaboration stack.&lt;/li&gt;&lt;li&gt;Streaming AI responses shipped in preview.10.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Metrics&lt;/h2&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Quarter&lt;/th&gt;&lt;th&gt;Revenue&lt;/th&gt;&lt;th&gt;Change&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Q1&lt;/td&gt;&lt;td&gt;$1.2M&lt;/td&gt;&lt;td&gt;+15%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Q4&lt;/td&gt;&lt;td&gt;$1.05M&lt;/td&gt;&lt;td&gt;+8%&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;blockquote&gt;Our buyers want one perpetual license, not three subscription SKUs.&lt;/blockquote&gt;&lt;p&gt;Edit anything above, then click &lt;strong&gt;Export to .docx&lt;/strong&gt; to see round-trip fidelity.&lt;/p&gt;' />
+                            <div class="mt-4 flex flex-wrap items-center gap-3">
+                                <button type="button" id="btnExportDocx" class="docx-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    Export to .docx
+                                </button>
+                                <button type="button" id="btnExportDocxNamed" class="docx-btn docx-btn-secondary">
+                                    Export with custom title
+                                </button>
+                                <span id="docxStatus" class="docx-status">Ready.</span>
+                            </div>
+                        </div>
+
+                        <aside class="docx-side">
+                            <h4>What's supported</h4>
+                            <p class="mb-2">Faithful round-trip of editor output:</p>
+                            <ul class="space-y-1 ml-4 list-disc">
+                                <li>Paragraphs, <code>h1</code>&ndash;<code>h6</code>, blockquote, code blocks, <code>hr</code></li>
+                                <li>Ordered &amp; unordered nested lists</li>
+                                <li>Tables with header rows</li>
+                                <li>Inline: bold, italic, underline, strike, sub, sup, code</li>
+                                <li>Hyperlinks and <code>style=</code> colors &amp; alignment</li>
+                                <li>Inline images (data URIs only)</li>
+                            </ul>
+                            <h4 class="mt-4">Not yet supported</h4>
+                            <ul class="space-y-1 ml-4 list-disc">
+                                <li>External image URLs (skipped for safety)</li>
+                                <li>Embedded videos</li>
+                                <li>CSS classes &mdash; use inline <code>style=</code></li>
+                            </ul>
+                        </aside>
+                    </div>
+
+                    <h3 class="mt-8 mb-2 text-base font-bold text-slate-900">Server wiring</h3>
+                    <p class="text-sm text-slate-600">The endpoint is mapped automatically by <code>MapRichTextBoxUploads()</code>.</p>
+<pre class="code-block"><span class="kw">using</span> RichTextBox;
+
+builder.Services.<span class="fn">AddRichTextBox</span>();
+
+<span class="kw">var</span> app = builder.<span class="fn">Build</span>();
+app.<span class="fn">MapRichTextBoxUploads</span>();   <span class="cmt">// also maps POST /richtextbox/export/docx</span>
+</pre>
+
+                    <h3 class="mt-5 mb-2 text-base font-bold text-slate-900">Client-side helper</h3>
+<pre class="code-block">editor.aiToolkit.<span class="fn">exportDocx</span>({
+    <span class="cmt">// all fields optional</span>
+    url:      <span class="str">"/richtextbox/export/docx"</span>,
+    fileName: <span class="str">"quarterly-update.docx"</span>,
+    title:    <span class="str">"Quarterly update"</span>,
+    onError:  <span class="kw">function</span> (err) { <span class="fn">console</span>.<span class="fn">error</span>(err); }
+});
+</pre>
+
+                    <h3 class="mt-5 mb-2 text-base font-bold text-slate-900">Or drive it yourself</h3>
+                    <p class="text-sm text-slate-600">The endpoint is a plain POST; feel free to call it from any stack (Blazor, JavaScript, even curl).</p>
+<pre class="code-block">curl -X POST <span class="str">"https://your-site/richtextbox/export/docx"</span> \
+    -H <span class="str">"Content-Type: application/json"</span> \
+    -d <span class="str">'{ "html": "&lt;p&gt;Hello&lt;/p&gt;", "title": "Memo" }'</span> \
+    -o memo.docx
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var status = document.getElementById("docxStatus");
+        function setStatus(msg, cls) {
+            status.textContent = msg;
+            status.className = "docx-status " + (cls || "");
+        }
+
+        function getEditor() {
+            if (typeof RTE_GetInstance === "function") return RTE_GetInstance("DocxEditor");
+            if (window.DocxEditor) return window.DocxEditor;
+            return null;
+        }
+
+        function doExport(options) {
+            var ed = getEditor();
+            if (!ed || !ed.aiToolkit || typeof ed.aiToolkit.exportDocx !== "function") {
+                setStatus("editor.aiToolkit.exportDocx not available", "err");
+                return;
+            }
+            setStatus("Building .docx on the server...");
+            var t0 = Date.now();
+            ed.aiToolkit.exportDocx(Object.assign({
+                onError: function (err) { setStatus("Export failed: " + (err && err.message || err), "err"); }
+            }, options || {})).then(function (fileName) {
+                setStatus("Downloaded " + fileName + " in " + (Date.now() - t0) + " ms", "ok");
+            }).catch(function () { /* handled in onError */ });
+        }
+
+        document.getElementById("btnExportDocx").addEventListener("click", function () {
+            doExport({ fileName: "richtextbox-export.docx", title: "RichTextBox document" });
+        });
+        document.getElementById("btnExportDocxNamed").addEventListener("click", function () {
+            var t = window.prompt("Document title:", "Q1 2026 quarterly update");
+            if (!t) return;
+            var safe = t.replace(/[\\\/\:\*\?"<>\|]/g, "").trim() || "document";
+            doExport({ title: t, fileName: safe + ".docx" });
+        });
+    })();
+</script>

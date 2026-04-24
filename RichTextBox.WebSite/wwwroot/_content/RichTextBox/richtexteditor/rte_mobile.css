@@ -1,0 +1,157 @@
+/*
+ * rte_mobile.css — opt-in mobile toolbar mode.
+ *
+ * Activate by adding class "rte-mobile" to the editor's outer container
+ * (the ASP.NET Core Tag Helper does this via `enable-mobile-toolbar="true"`).
+ * The styles target a narrow viewport even when the class is on, so desktop
+ * breakpoints keep the default layout if someone leaves the class on.
+ *
+ * Design goals:
+ *   • 44×44 minimum hit targets (WCAG 2.5.5 Target Size)
+ *   • Toolbar scrolls horizontally instead of wrapping and stealing vertical space
+ *   • No floating popouts that clip off-screen on small devices
+ *   • Virtual-keyboard aware: sticky toolbar stays visible when kb opens
+ *   • No changes to the editing surface markup — layout only
+ */
+
+.rte-mobile .rte-toolbar,
+.rte-mobile [id$="_toolbar"],
+.rte-mobile .rte_toolbar {
+    padding: 4px 6px;
+    gap: 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.rte-mobile .rte-toolbar::-webkit-scrollbar,
+.rte-mobile [id$="_toolbar"]::-webkit-scrollbar,
+.rte-mobile .rte_toolbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Toolbar groups don't wrap on mobile — they scroll as a single row. */
+.rte-mobile .rte-toolbar-row,
+.rte-mobile .rte_toolbarrow {
+    flex-wrap: nowrap !important;
+    white-space: nowrap;
+}
+
+/* Buttons: 44×44 minimum, larger tap targets, bigger icon. */
+@media (max-width: 768px), (pointer: coarse) {
+    .rte-mobile .rte-toolbar button,
+    .rte-mobile [id$="_toolbar"] .rte-button,
+    .rte-mobile .rte_toolbar .rte_button,
+    .rte-mobile .rte-toolbar .rte-dropdown-toggle {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 10px 12px;
+        border-radius: 10px;
+    }
+    .rte-mobile .rte-toolbar button svg,
+    .rte-mobile [id$="_toolbar"] svg,
+    .rte-mobile .rte_toolbar svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Dropdowns open as bottom sheets on very small screens so they never clip. */
+    .rte-mobile .rte-popup,
+    .rte-mobile .rte-dropdown-menu,
+    .rte-mobile .rte_popup {
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        top: auto !important;
+        max-height: 60vh;
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        border: 1px solid #e2e8f0;
+        border-bottom: none;
+        box-shadow: 0 -12px 32px rgba(15, 23, 42, 0.12);
+        padding: 10px 6px 22px;
+        overflow-y: auto;
+        z-index: 2147483647;
+    }
+    /* A translucent scrim while a sheet is open (class toggled by host CSS ideally). */
+    .rte-mobile .rte-popup::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.28);
+        z-index: -1;
+    }
+
+    /* Dialogs (link, image, table-insert, Ask AI) use full width on mobile. */
+    .rte-mobile .rte-dialog,
+    .rte-mobile .rte_dialog,
+    .rte-mobile .aitoolkit-dialog {
+        left: 8px !important;
+        right: 8px !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+
+    /* Review drawer slides from the bottom on mobile instead of the right — more predictable with on-screen keyboards. */
+    .rte-mobile .aitoolkit-review-drawer,
+    .rte-mobile .comments-sidebar {
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        top: auto !important;
+        width: auto !important;
+        max-height: 55vh;
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    /* Sticky toolbar so it stays visible while virtual keyboard pushes content. */
+    .rte-mobile {
+        display: flex;
+        flex-direction: column;
+    }
+    .rte-mobile .rte-toolbar,
+    .rte-mobile [id$="_toolbar"],
+    .rte-mobile .rte_toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #fff;
+    }
+
+    /* Floating paragraph / inline toolbars — kill them on mobile, they get in the way of the keyboard. */
+    .rte-mobile .rte-floating-toolbar,
+    .rte-mobile .rte_floattoolbar,
+    .rte-mobile .rte_floatparagraph {
+        display: none !important;
+    }
+
+    /* Bigger font inside content area for readability without zoom. */
+    .rte-mobile .rte-content,
+    .rte-mobile iframe.rte_iframe {
+        font-size: 16px; /* iOS doesn't auto-zoom inputs at 16px+ */
+    }
+}
+
+/* Fade gradient at the right edge of the toolbar as an overflow affordance. */
+@media (max-width: 768px), (pointer: coarse) {
+    .rte-mobile .rte-toolbar-wrap,
+    .rte-mobile .rte_toolbarwrap {
+        position: relative;
+    }
+    .rte-mobile .rte-toolbar-wrap::after,
+    .rte-mobile .rte_toolbarwrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 24px;
+        pointer-events: none;
+        background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+}

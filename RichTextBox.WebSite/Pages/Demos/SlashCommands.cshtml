@@ -1,0 +1,83 @@
+@page
+@{
+    ViewData["Title"] = "Slash Commands";
+    ViewData["DemoNumber"] = 151;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Slash Commands</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Notion / Tiptap-style inline command picker. Type <kbd>/</kbd> at the start of a line (or after whitespace) inside the editor to open a filter-as-you-type menu for headings, lists, tables, images, dividers, and every registered AI action. Arrow keys + <kbd>Enter</kbd> to insert; <kbd>Esc</kbd> to dismiss.
+                    </p>
+
+                    <richtextbox
+                        id="slashEditor"
+                        name="slashEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="360px"
+                        enable-ai-toolkit="true"
+                        ai-toolkit-persistence-key="demo-slash-commands"
+                        html="<p>Type <b>/</b> on a new line to open the slash command menu. Every built-in block (heading, list, quote, code, divider) is one keystroke away, and every AI action from the toolkit shows up in the same picker.</p><p></p>"></richtextbox>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">What's included out of the box</div>
+                            <p class="demo-note-text">
+                                15 default commands (H1 / H2 / H3, paragraph, bulleted / numbered list, quote, code block, divider, table, image, link, emoji, template, today's date) + every <code>aiToolkitActions</code> entry (proofread, rewrite, translate, summarize, &hellip;) appear in the same menu. Customers register their own via <code>editor.slashCommands.register(&hellip;)</code>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Register a custom command</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>&lt;script&gt;
+window.addEventListener("DOMContentLoaded", function () {
+    var editor = window.richTextBoxEditors &amp;&amp; window.richTextBoxEditors.slashEditor;
+    if (!editor || !editor.slashCommands) return;
+
+    editor.slashCommands.register({
+        id: "call-to-action",
+        section: "Custom",
+        title: "Call to action",
+        description: "Insert a highlighted CTA block",
+        keywords: ["cta", "banner"],
+        run: function (ed) {
+            ed.insertHTML('&lt;p style="padding:10px 14px;background:#eef2ff;border-left:3px solid #4f46e5;border-radius:6px;"&gt;' +
+                          '&lt;strong&gt;Call to action&lt;/strong&gt; &mdash; your pitch here.&lt;/p&gt;');
+        }
+    });
+});
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    function register() {
+        var editor = window.richTextBoxEditors && window.richTextBoxEditors.slashEditor;
+        if (!editor || !editor.slashCommands) { setTimeout(register, 100); return; }
+        editor.slashCommands.register({
+            id: "call-to-action",
+            section: "Custom",
+            title: "Call to action",
+            description: "Insert a highlighted CTA block",
+            keywords: ["cta", "banner"],
+            run: function (ed) {
+                ed.insertHTML('<p style="padding:10px 14px;background:#eef2ff;border-left:3px solid #4f46e5;border-radius:6px;"><strong>Call to action</strong> &mdash; your pitch here.</p>');
+            }
+        });
+    }
+    register();
+})();
+</script>
+}

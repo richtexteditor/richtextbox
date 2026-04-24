@@ -1,0 +1,157 @@
+@page
+@{
+    ViewData["Title"] = "Structured Content";
+    ViewData["DemoNumber"] = 102;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Structured Content</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        This demo enables the structured-content bridge for the ASP.NET Core tag helper so the editor can expose
+                        semantic JSON, Markdown conversion, static HTML rendering, and validation helpers on top of the normal HTML workflow.
+                    </p>
+
+                    <div class="mb-5 flex flex-wrap gap-3">
+                        <button type="button" id="btnExportJson" class="rtb-btn rtb-btn-primary rtb-btn-sm">Export JSON</button>
+                        <button type="button" id="btnLoadJson" class="rtb-btn rtb-btn-primary rtb-btn-sm">Load sample JSON</button>
+                        <button type="button" id="btnExportMarkdown" class="rtb-btn rtb-btn-outline rtb-btn-sm">Export Markdown</button>
+                        <button type="button" id="btnImportMarkdown" class="rtb-btn rtb-btn-outline rtb-btn-sm">Load Markdown</button>
+                        <button type="button" id="btnValidateStructured" class="rtb-btn rtb-btn-outline rtb-btn-sm">Validate</button>
+                    </div>
+
+                    <richtextbox
+                        id="StructuredEditor"
+                        name="StructuredEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="420px"
+                        enable-structured-content="true"
+                        html="<h2>Structured Content Demo</h2><p>Use this editor as HTML, then move the content into a semantic JSON document for storage, rendering, Markdown conversion, or validation.</p><ul><li>Export the current document to semantic JSON.</li><li>Round-trip Markdown through the same structured model.</li><li>Generate static HTML without needing a live editor instance.</li></ul>"></richtextbox>
+
+                    <div class="mt-6 grid gap-4 xl:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-slate-700">Semantic JSON</label>
+                            <textarea id="structuredJsonOutput" class="min-h-[280px] w-full rounded-xl border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-700"></textarea>
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-slate-700">Markdown / validation</label>
+                            <textarea id="structuredMarkdownOutput" class="min-h-[180px] w-full rounded-xl border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-700"></textarea>
+                            <div id="structuredValidationOutput" class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600"></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <label class="mb-2 block text-sm font-semibold text-slate-700">Static HTML render</label>
+                        <div id="structuredRenderOutput" class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"></div>
+                    </div>
+
+                    <div class="code-panel mt-5">
+                        <pre><code>&lt;richtextbox
+    id="StructuredEditor"
+    name="StructuredEditor"
+    toolbar="default"
+    enable-structured-content="true"
+    height="420px" /&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    var sampleMarkdown = "# Structured sample\n\nThis editor can round-trip **Markdown** and semantic JSON.\n\n- Export from the live editor\n- Render HTML without a live editor instance\n- Validate document structure before save";
+    var sampleDocument = {
+        version: 2,
+        type: "richtexteditor-json",
+        content: [
+            {
+                type: "heading",
+                attrs: { level: 2 },
+                content: [{ type: "text", text: "Release Outline" }]
+            },
+            {
+                type: "paragraph",
+                content: [{ type: "text", text: "This sample JSON document is loaded directly into the editor from Razor." }]
+            },
+            {
+                type: "bulletList",
+                content: [
+                    { type: "listItem", content: [{ type: "paragraph", content: [{ type: "text", text: "Capture semantic content" }] }] },
+                    { type: "listItem", content: [{ type: "paragraph", content: [{ type: "text", text: "Convert to Markdown" }] }] },
+                    { type: "listItem", content: [{ type: "paragraph", content: [{ type: "text", text: "Render static HTML" }] }] }
+                ]
+            }
+        ]
+    };
+
+    function getEditor() {
+        return window.richTextBoxEditors && window.richTextBoxEditors.StructuredEditor
+            ? window.richTextBoxEditors.StructuredEditor
+            : window.StructuredEditor;
+    }
+
+    function getBridge() {
+        return window.RichTextEditorStructuredContent || null;
+    }
+
+    function refreshOutputs() {
+        var editor = getEditor();
+        var bridge = getBridge();
+        if (!editor || !bridge || typeof editor.getJSON !== "function") {
+            return;
+        }
+
+        var payload = editor.getJSON();
+        document.getElementById("structuredJsonOutput").value = JSON.stringify(payload, null, 2);
+        document.getElementById("structuredMarkdownOutput").value = bridge.toMarkdown(payload);
+
+        var validation = bridge.validateStructuredContent(payload);
+        document.getElementById("structuredValidationOutput").textContent = validation.valid
+            ? "Validation passed. The current document fits the structured-content schema."
+            : "Validation issues: " + JSON.stringify(validation.issues || [], null, 2);
+
+        document.getElementById("structuredRenderOutput").innerHTML = bridge.renderHTML(payload);
+    }
+
+    document.getElementById("btnExportJson").addEventListener("click", refreshOutputs);
+
+    document.getElementById("btnLoadJson").addEventListener("click", function () {
+        var editor = getEditor();
+        if (!editor || typeof editor.setJSON !== "function") {
+            return;
+        }
+
+        editor.setJSON(sampleDocument);
+        refreshOutputs();
+    });
+
+    document.getElementById("btnExportMarkdown").addEventListener("click", function () {
+        refreshOutputs();
+        document.getElementById("structuredMarkdownOutput").focus();
+        document.getElementById("structuredMarkdownOutput").select();
+    });
+
+    document.getElementById("btnImportMarkdown").addEventListener("click", function () {
+        var editor = getEditor();
+        var bridge = getBridge();
+        if (!editor || !bridge || typeof editor.setJSON !== "function") {
+            return;
+        }
+
+        editor.setJSON(bridge.fromMarkdown(sampleMarkdown));
+        refreshOutputs();
+    });
+
+    document.getElementById("btnValidateStructured").addEventListener("click", refreshOutputs);
+
+    window.setTimeout(refreshOutputs, 250);
+})();
+</script>
+}

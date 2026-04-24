@@ -1,0 +1,148 @@
+@page
+@{
+    ViewData["Title"] = "Real-time Collaboration (Yjs)";
+    ViewData["DemoNumber"] = 156;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Real-time Collaboration (Yjs presence + shared review ledger)</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Two editors on this page share a single <code>Y.Doc</code> via a peer-dependency <code>y-protocols</code> Awareness channel. Move your cursor in one, watch the colored caret appear in the other. Add a comment or tracked change in one, see it replicate instantly to the other &mdash; every entry in <code>editor.reviewLedger</code> (AI suggestions, tracked changes, comments) rides a shared <code>Y.Map</code>. Concurrent text editing is <em>not</em> in v1 (that needs a content-level CRDT binding).
+                    </p>
+
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                            <div class="mb-2 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <span class="inline-block h-3 w-3 rounded-full" style="background:#2563eb"></span>
+                                Alice Lee
+                            </div>
+                            <richtextbox
+                                id="yjsEditorA"
+                                name="yjsEditorA"
+                                toolbar="basic"
+                                width="100%"
+                                height="260px"
+                                enable-ai-toolkit="true"
+                                ai-toolkit-persistence-key="demo-yjs-a"
+                                html="<p>Welcome Alice. Select a phrase and click the Comment button to see it sync to Bob's editor.</p>"></richtextbox>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                            <div class="mb-2 flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <span class="inline-block h-3 w-3 rounded-full" style="background:#dc2626"></span>
+                                Bob Chen
+                            </div>
+                            <richtextbox
+                                id="yjsEditorB"
+                                name="yjsEditorB"
+                                toolbar="basic"
+                                width="100%"
+                                height="260px"
+                                enable-ai-toolkit="true"
+                                ai-toolkit-persistence-key="demo-yjs-b"
+                                html="<p>Welcome Bob. Your view of the shared ledger updates when Alice adds a comment or tracked change.</p>"></richtextbox>
+                        </div>
+                    </div>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">v1 (default) — Awareness + shared ledger</div>
+                            <p class="demo-note-text">
+                                <strong>Awareness</strong> (live cursors + presence) and <strong>shared reviewLedger</strong> (every AI / tracked-change / comment entry replicates via a single <code>Y.Map</code>). Yjs and the provider are <strong>peer dependencies</strong>: the plugin never ships them. Customers load them (ESM from CDN, npm, etc.) and pass a <code>Y.Doc</code> + anything with an <code>.awareness</code> field to <code>editor.collab.attach()</code>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="demo-note mt-3" style="border-left-color:#16a34a;">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">v2 preview (opt-in) — Concurrent typing via Y.Text</div>
+                            <p class="demo-note-text">
+                                Pass <code>textSync: true</code> to <code>attach()</code> to bind the editor's full HTML to a shared <code>Y.Text</code>. CRDT merges
+                                concurrent inserts/deletes at character level, so two users typing in different parts of the document converge without losing either edit.
+                                <br /><br />
+                                <strong>Tradeoffs in this preview:</strong> remote updates re-set the body (caret snaps to start), and HTML character offsets don't align with
+                                rendered caret positions. Production-grade per-node binding (<code>y-xml-fragment</code>) is on the roadmap; this MVP closes the
+                                "two users typing" RFP checkbox today without waiting for the full binding.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Production wiring</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
+
+const ydoc = new Y.Doc();
+const provider = new WebsocketProvider("wss://collab.example.com", documentId, ydoc);
+
+editor.collab.attach({
+    doc: ydoc,
+    provider: provider,
+    user: { id: currentUser.id, name: currentUser.name, color: userColor },
+    textSync: true            // opt-in concurrent typing via shared Y.Text
+});</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">API</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>editor.collab.attach({ doc, provider, user });
+editor.collab.detach();
+editor.collab.isAttached();
+editor.collab.peers();        // array of { clientId, user, caret }
+editor.collab.setUser(user);  // update local identity mid-session</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script type="module">
+    // Peer-dependency Yjs + Awareness from CDN (customers can use npm or any provider).
+    import * as Y from "https://esm.sh/yjs@13.6.27";
+    import { Awareness } from "https://esm.sh/y-protocols@1.0.6/awareness?deps=yjs@13.6.27";
+
+    function waitFor(key, cb) {
+        var ed = window.richTextBoxEditors && window.richTextBoxEditors[key];
+        if (!ed || !ed.collab) { setTimeout(function () { waitFor(key, cb); }, 100); return; }
+        cb(ed);
+    }
+
+    waitFor("yjsEditorA", function (edA) {
+        waitFor("yjsEditorB", function (edB) {
+            // Separate Y.Docs with distinct clientIDs, bridged in-memory so this single-tab
+            // demo behaves like two browsers talking through a network provider.
+            const docA = new Y.Doc();
+            const docB = new Y.Doc();
+            const awA = new Awareness(docA);
+            const awB = new Awareness(docB);
+
+            docA.on("update", function (u, origin) { if (origin !== "remote") Y.applyUpdate(docB, u, "remote"); });
+            docB.on("update", function (u, origin) { if (origin !== "remote") Y.applyUpdate(docA, u, "remote"); });
+
+            function bridgeAwareness(src, dst) {
+                src.on("update", function (e, origin) {
+                    if (origin === "remote") return;
+                    var added = e.added || [], updated = e.updated || [], removed = e.removed || [];
+                    added.concat(updated).forEach(function (clientId) {
+                        var state = src.getStates().get(clientId);
+                        if (state) dst.getStates().set(clientId, state);
+                    });
+                    removed.forEach(function (clientId) { dst.getStates().delete(clientId); });
+                    dst.emit("change", [{ added: added, updated: updated, removed: removed }, "remote"]);
+                    dst.emit("update", [{ added: added, updated: updated, removed: removed }, "remote"]);
+                });
+            }
+            bridgeAwareness(awA, awB);
+            bridgeAwareness(awB, awA);
+
+            edA.collab.attach({ doc: docA, provider: { awareness: awA }, user: { id: "alice", name: "Alice Lee", color: "#2563eb" }, textSync: true });
+            edB.collab.attach({ doc: docB, provider: { awareness: awB }, user: { id: "bob",   name: "Bob Chen",   color: "#dc2626" }, textSync: true });
+        });
+    });
+</script>
+}

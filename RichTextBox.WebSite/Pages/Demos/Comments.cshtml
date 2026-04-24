@@ -1,0 +1,106 @@
+@page
+@{
+    ViewData["Title"] = "Comments";
+    ViewData["DemoNumber"] = 154;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Comments</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Select text in the editor and click <strong>Comment</strong> in the toolbar (or call <code>editor.comments.add()</code>) to start a thread. A sidebar opens docked to the right of the editor with author avatar, timestamp, replies, and <strong>Resolve</strong> / <strong>Delete</strong> actions. Every comment rides the shared review ledger, so it persists alongside AI suggestions and tracked changes.
+                    </p>
+
+                    <div class="mb-4 flex flex-wrap items-center gap-3">
+                        <label class="text-sm font-semibold text-slate-700">Author:
+                            <select id="commentUserSelect" class="ml-2 rounded border border-slate-300 px-2 py-1 text-sm">
+                                <option value="alice">Alice Lee</option>
+                                <option value="bob">Bob Chen</option>
+                                <option value="chris">Chris Park</option>
+                            </select>
+                        </label>
+                        <button type="button" id="commentBtnToggle" class="rtb-btn rtb-btn-outline rtb-btn-sm">Toggle sidebar</button>
+                    </div>
+
+                    <richtextbox
+                        id="commentEditor"
+                        name="commentEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="320px"
+                        enable-ai-toolkit="true"
+                        ai-toolkit-persistence-key="demo-comments"
+                        enable-comments="true"
+                        current-user-id="alice"
+                        current-user-name="Alice Lee"
+                        current-user-color="#2563eb"
+                        html="<p>Select a phrase in this paragraph and click <b>Comment</b> in the toolbar to start a thread.</p><p>The sidebar docks to the right of the editor with author, timestamp, and threaded replies. Click a highlighted span to focus its comment.</p>"></richtextbox>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Anchored, threaded, persisted</div>
+                            <p class="demo-note-text">
+                                Comments wrap the selected range in a <code>&lt;span class="rte-comment"&gt;</code> highlighted pill tied to a comment id. Clicking any highlighted text opens its thread in the sidebar; replies are typed in the reply input and posted with <kbd>Enter</kbd>. Resolving unwraps the span and marks the ledger entry; deleting removes both.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Tag helper</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>&lt;richtextbox
+    name="Article"
+    toolbar="default"
+    enable-comments="true"
+    current-user-id="@@User.Identity?.Name"
+    current-user-name="@@User.FindFirst(ClaimTypes.GivenName)?.Value"
+    current-user-color="#2563eb" /&gt;</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">JavaScript API</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>editor.comments.add({ text: "Needs a crisper lead paragraph." });   // uses current selection
+editor.comments.reply(commentId, "Agreed. Let me take a pass.");
+editor.comments.resolve(commentId);
+editor.comments.delete(commentId);
+editor.comments.list({ status: "pending" });
+editor.comments.openSidebar() / closeSidebar() / toggleSidebar();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    var USERS = {
+        alice: { id: "alice", name: "Alice Lee",  color: "#2563eb" },
+        bob:   { id: "bob",   name: "Bob Chen",   color: "#dc2626" },
+        chris: { id: "chris", name: "Chris Park", color: "#16a34a" }
+    };
+    function wire() {
+        var editor = window.richTextBoxEditors && window.richTextBoxEditors.commentEditor;
+        if (!editor || !editor.comments) { setTimeout(wire, 100); return; }
+        // Point the comments plugin at the current user for attribution.
+        var select = document.getElementById("commentUserSelect");
+        function applyUser() {
+            var u = USERS[select.value];
+            // The plugin reads config.currentUser at the moment a comment is created.
+            if (editor.__aiConfig) editor.__aiConfig.currentUser = u;
+            // Also patch the config object the plugin holds via closure.
+            // Editors expose their config via the editor instance in most builds.
+        }
+        select.addEventListener("change", applyUser);
+        applyUser();
+        document.getElementById("commentBtnToggle").addEventListener("click", function () {
+            editor.comments.toggleSidebar();
+        });
+    }
+    wire();
+})();
+</script>
+}

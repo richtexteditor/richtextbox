@@ -1,0 +1,205 @@
+@page
+@{
+    ViewData["Title"] = "AI Toolkit";
+    ViewData["DemoNumber"] = 101;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">AI Toolkit</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        In-editor AI for the <code>&lt;richtextbox&gt;</code> tag helper: <strong>Ask AI</strong> in the toolbar, a docked <strong>AI Chat</strong> panel,
+                        an inline suggestion preview, and a persistent <strong>AI Review</strong> drawer backed by
+                        <code>MapRichTextBoxUploads()</code>'s server-side endpoints. The built-in demo resolver runs here so <strong>no API key is required</strong>.
+                    </p>
+
+                    <div class="mb-5 flex flex-wrap gap-3">
+                        <button type="button" id="btnOpenAiDialog" class="rtb-btn rtb-btn-primary rtb-btn-sm">Open Ask AI</button>
+                        <button type="button" id="btnProofreadFirst" class="rtb-btn rtb-btn-outline rtb-btn-sm">Proofread first paragraph</button>
+                        <button type="button" id="btnSummarize" class="rtb-btn rtb-btn-outline rtb-btn-sm">Summarize document</button>
+                        <button type="button" id="btnOpenAiChat" class="rtb-btn rtb-btn-outline rtb-btn-sm">Open AI Chat</button>
+                        <button type="button" id="btnOpenAiReview" class="rtb-btn rtb-btn-outline rtb-btn-sm">Open AI Review</button>
+                        <button type="button" id="btnSyncAiReview" class="rtb-btn rtb-btn-muted rtb-btn-sm">Sync shared review</button>
+                        <a href="/Demos/AiProviderSettings" class="rtb-btn rtb-btn-muted rtb-btn-sm">See the BYOK pattern &rarr;</a>
+                    </div>
+
+                    <richtextbox
+                        id="AiToolkitEditor"
+                        name="AiToolkitEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="440px"
+                        enable-ai-toolkit="true"
+                        ai-toolkit-persistence-key="demo-ai-toolkit"
+                        ai-toolkit-review-sync-interval="10000"
+                        html="<h2>Launch-ready product update</h2><p>RichTextBox for ASP.NET Core now supports in-editor AI actions that stay close to the document instead of opening a disconnected utility panel.</p><p>Select a paragraph and click <strong>Ask AI</strong> in the toolbar to try proofread, rewrite, shorten, expand, summarize, or translate. Each suggestion previews inline - nothing commits until you accept.</p><ul><li>Inline AI preview with accept / reject controls</li><li>Docked AI Chat for multi-turn editing help</li><li>AI Review drawer for pending, accepted, and rejected suggestions</li></ul>"></richtextbox>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">What this demo is showing</div>
+                            <p class="demo-note-text">
+                                <strong>enable-ai-toolkit</strong> turns on the AI plugin for this editor only. The tag helper assigns a persistence key,
+                                configures the shared review endpoints, and injects a server-backed demo resolver so the AI workflow works in ASP.NET Core
+                                without adding custom page bootstrapping. If you register your own <code>IRichTextBoxAiResolver</code>, the same toolbar, chat,
+                                and review UI will call your server logic instead. You can also swap <code>IRichTextBoxAiSuggestionLedgerStore</code> and
+                                <code>IRichTextBoxAiReviewLogStore</code> if you want shared review state to live in SQL, Redis, or another backend.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Tag helper</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>&lt;richtextbox
+    id="AiToolkitEditor"
+    name="AiToolkitEditor"
+    toolbar="default"
+    enable-ai-toolkit="true"
+    ai-toolkit-persistence-key="demo-ai-toolkit"
+    ai-toolkit-review-sync-interval="10000"
+    height="440px" /&gt;</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Register your own resolver</h3>
+                    <p class="demo-description">
+                        The editor is provider-agnostic. Register an implementation of <code>IRichTextBoxAiResolver</code> in DI and the existing tag-helper,
+                        dialog, chat, and review UI will call your server logic.
+                    </p>
+                    <div class="code-panel mt-3">
+                        <pre><code>builder.Services.AddRichTextBox();
+builder.Services.AddSingleton&lt;IRichTextBoxAiResolver, MyAiResolver&gt;();</code></pre>
+                    </div>
+                    <div class="code-panel mt-3">
+                        <pre><code>public sealed class MyAiResolver : IRichTextBoxAiResolver
+{
+    public ValueTask&lt;RichTextBoxAiResponse&gt; ResolveAsync(RichTextBoxAiRequest request, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(
+            RichTextBoxAiResponseBuilder.FromOperations(
+                request.HasSelection ? "Selection suggestion" : "Document suggestion",
+                RichTextBoxAiResponseBuilder.PreviewSuggestion(
+                    "Provider-backed rewrite goes here.",
+                    "Generated by a custom ASP.NET Core AI resolver.")));
+    }
+}</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Wire your own backend (client side)</h3>
+                    <p class="demo-description">
+                        When you need fully custom request shaping, swap the client-side resolver instead. Every editor exposes
+                        <code>aiToolkit.setResolver()</code> - the toolbar, dialog, and panels call your function and handle the UI for you.
+                    </p>
+                    <div class="code-panel mt-3">
+                        <pre><code>&lt;script&gt;
+window.addEventListener("DOMContentLoaded", function () {
+    var editor = window.richTextBoxEditors &amp;&amp; window.richTextBoxEditors.AiToolkitEditor;
+    if (!editor || !editor.aiToolkit) return;
+
+    editor.aiToolkit.setResolver(async function (request) {
+        // POST to YOUR backend - the key stays server-side
+        var reply = await fetch("/my-ai", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                mode: request.mode, text: request.source, language: request.language
+            })
+        }).then(function (r) { return r.json(); });
+
+        return {
+            result: reply.text,
+            reason: reply.explanation,
+            operations: [{ type: "preview-suggestion", text: reply.text }]
+        };
+    });
+});
+&lt;/script&gt;</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Persist suggestions across sessions</h3>
+                    <p class="demo-description">
+                        Swap the default in-memory stores to share pending / accepted / rejected review state across requests and users.
+                    </p>
+                    <div class="code-panel mt-3">
+                        <pre><code>builder.Services.AddSingleton&lt;IRichTextBoxAiSuggestionLedgerStore, MySuggestionLedgerStore&gt;();
+builder.Services.AddSingleton&lt;IRichTextBoxAiReviewLogStore, MyReviewLogStore&gt;();</code></pre>
+                    </div>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">Looking for a BYOK admin form?</div>
+                            <p class="demo-note-text">
+                                See the <a href="/Demos/AiProviderSettings">AI Provider Settings (BYOK)</a> demo for a worked
+                                bring-your-own-key pattern - tenant admin form, client-side resolver swap via <code>setResolver()</code>,
+                                and a server-side <code>/api/ai</code> handler sketch that reads keys from a secrets store.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    function getEditor() {
+        return window.richTextBoxEditors && window.richTextBoxEditors.AiToolkitEditor
+            ? window.richTextBoxEditors.AiToolkitEditor
+            : window.AiToolkitEditor;
+    }
+
+    function run(action) {
+        var editor = getEditor();
+        if (!editor || !editor.aiToolkit) {
+            return;
+        }
+
+        action(editor);
+    }
+
+    function selectFirstParagraph(editor) {
+        var doc = editor.getDocument ? editor.getDocument() : null;
+        var p = doc ? doc.querySelector("p") : null;
+        if (!p || !p.firstChild) { editor.focus && editor.focus(); return; }
+        var sel = doc.getSelection ? doc.getSelection() : window.getSelection();
+        var range = doc.createRange();
+        range.setStart(p.firstChild, 0);
+        range.setEnd(p.firstChild, p.textContent.length);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        editor.focus && editor.focus();
+    }
+
+    document.getElementById("btnOpenAiDialog").addEventListener("click", function () {
+        run(function (editor) { editor.aiToolkit.openDialog({ presetMode: "rewrite" }); });
+    });
+
+    document.getElementById("btnProofreadFirst").addEventListener("click", function () {
+        run(function (editor) { selectFirstParagraph(editor); editor.aiToolkit.runQuickAction("proofread"); });
+    });
+
+    document.getElementById("btnSummarize").addEventListener("click", function () {
+        run(function (editor) { editor.aiToolkit.runQuickAction("summarize"); });
+    });
+
+    document.getElementById("btnOpenAiChat").addEventListener("click", function () {
+        run(function (editor) { editor.aiToolkit.openChatPanel({ focusComposer: true }); });
+    });
+
+    document.getElementById("btnOpenAiReview").addEventListener("click", function () {
+        run(function (editor) { editor.aiToolkit.openReviewPanel(); });
+    });
+
+    document.getElementById("btnSyncAiReview").addEventListener("click", function () {
+        run(function (editor) {
+            if (editor.aiToolkit.refreshRemoteReviewState) {
+                editor.aiToolkit.refreshRemoteReviewState(true);
+            }
+        });
+    });
+})();
+</script>
+}

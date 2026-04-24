@@ -1,0 +1,146 @@
+@page
+@{
+    ViewData["Title"] = "Dictation";
+    ViewData["DemoNumber"] = 106;
+}
+<style>
+    .dict-card {
+        border: 1px solid #e2e8f0; border-radius: 14px; background: #fff;
+        padding: 16px 18px;
+    }
+    .dict-pill {
+        display: inline-flex; align-items: center;
+        background: #ecfccb; color: #3f6212;
+        padding: 3px 9px; border-radius: 999px;
+        font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .dict-note {
+        margin-top: 12px; padding: 10px 14px;
+        border-left: 3px solid #0f8b8d; border-radius: 8px;
+        background: #f0f9fa; color: #075f62; font-size: 13px; line-height: 1.55;
+    }
+    .code-block {
+        margin: 10px 0; padding: 12px 14px; border-radius: 10px;
+        background: #0b1220; color: #e2e8f0;
+        font: 500 12px/1.65 Consolas, "SF Mono", Menlo, monospace;
+        overflow-x: auto;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #7dd3fc; }
+    .code-block .cmt { color: #64748b; font-style: italic; }
+    .lang-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .lang-chip {
+        padding: 5px 11px; border-radius: 999px; border: 1px solid #e2e8f0;
+        background: #fff; font-size: 12px; font-weight: 600; color: #475569;
+        cursor: pointer;
+    }
+    .lang-chip.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+</style>
+
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    Dictation
+                    <span class="dict-pill">New in preview.12</span>
+                </div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Speak, and the editor transcribes. The toolbar's microphone button toggles dictation on and off;
+                        interim transcripts render live under the cursor so you can see what the browser heard before it
+                        commits. Uses the <a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" class="text-[#0f8b8d] underline">Web Speech API</a> &mdash;
+                        no external service, no data leaves the browser beyond what your browser already sends to its
+                        voice recognition vendor.
+                    </p>
+
+                    <div class="dict-note">
+                        <strong>Browser support:</strong> Chrome, Edge, Opera, Safari (iOS 14+ / macOS).
+                        Firefox does not yet ship a <code>SpeechRecognition</code> implementation &mdash; the plugin detects this
+                        and hides the toolbar button.
+                        <br />
+                        <strong>First click:</strong> your browser will prompt for microphone permission. Grant it once per site.
+                    </div>
+
+                    <h3 class="mt-5 mb-2 text-base font-bold text-slate-900">Try it</h3>
+                    <p class="text-sm text-slate-600 mb-3">
+                        Click the microphone in the toolbar, then speak. Click again to stop. The button pulses red while listening.
+                    </p>
+
+                    <richtextbox id="DictationEditor"
+                                 name="Body"
+                                 toolbar="default"
+                                 height="280px"
+                                 enable-dictation="true"
+                                 dictation-lang="en-US"
+                                 dictation-continuous="true"
+                                 dictation-auto-punctuation="true"
+                                 initial-content="&lt;p&gt;Click the microphone icon, then speak. What you say appears here.&lt;/p&gt;" />
+
+                    <div class="mt-5">
+                        <h4 class="text-sm font-semibold text-slate-900 mb-1">Language</h4>
+                        <p class="text-xs text-slate-500">Changes the BCP-47 language tag the browser uses. Stop and restart dictation after switching.</p>
+                        <div class="lang-row" id="langRow">
+                            <button type="button" class="lang-chip active" data-lang="en-US">English (US)</button>
+                            <button type="button" class="lang-chip" data-lang="en-GB">English (UK)</button>
+                            <button type="button" class="lang-chip" data-lang="es-ES">Espa&ntilde;ol</button>
+                            <button type="button" class="lang-chip" data-lang="fr-FR">Fran&ccedil;ais</button>
+                            <button type="button" class="lang-chip" data-lang="de-DE">Deutsch</button>
+                            <button type="button" class="lang-chip" data-lang="pt-BR">Portugu&ecirc;s (BR)</button>
+                            <button type="button" class="lang-chip" data-lang="zh-CN">&#20013;&#25991; (&#31616;&#20307;)</button>
+                            <button type="button" class="lang-chip" data-lang="ja-JP">&#26085;&#26412;&#35486;</button>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-8 mb-2 text-base font-bold text-slate-900">Tag Helper wiring</h3>
+<pre class="code-block">&lt;<span class="kw">richtextbox</span> asp-for=<span class="str">"Body"</span> toolbar=<span class="str">"default"</span>
+             enable-dictation=<span class="str">"true"</span>
+             dictation-lang=<span class="str">"en-US"</span>
+             dictation-continuous=<span class="str">"true"</span>
+             dictation-auto-punctuation=<span class="str">"true"</span> /&gt;
+</pre>
+
+                    <h3 class="mt-5 mb-2 text-base font-bold text-slate-900">JS API</h3>
+<pre class="code-block">editor.dictation.<span class="fn">start</span>();
+editor.dictation.<span class="fn">stop</span>();
+editor.dictation.<span class="fn">toggle</span>();
+editor.dictation.<span class="fn">isListening</span>();
+editor.dictation.<span class="fn">isSupported</span>();
+</pre>
+
+                    <h3 class="mt-5 mb-2 text-base font-bold text-slate-900">Configuration</h3>
+                    <ul class="text-sm text-slate-600 list-disc pl-5 space-y-1">
+                        <li><code>dictationLang</code> &mdash; BCP-47 language, e.g. <code>"en-US"</code>, <code>"zh-CN"</code>, <code>"ja-JP"</code>.</li>
+                        <li><code>dictationContinuous</code> &mdash; default <code>true</code>. When <code>false</code>, stops after one utterance.</li>
+                        <li><code>dictationInterimResults</code> &mdash; default <code>true</code>. Renders a faint preview of what the browser is still hearing.</li>
+                        <li><code>dictationAutoPunctuation</code> &mdash; default <code>true</code>. Capitalizes the first word of each final chunk and appends a period if none.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        function getEditor() {
+            if (typeof RTE_GetInstance === "function") return RTE_GetInstance("DictationEditor");
+            return window.DictationEditor || null;
+        }
+        document.getElementById("langRow").addEventListener("click", function (e) {
+            var btn = e.target.closest(".lang-chip");
+            if (!btn) return;
+            var lang = btn.getAttribute("data-lang");
+            var ed = getEditor();
+            if (!ed || !ed.dictation) return;
+            // Stop any in-progress session so the new language takes effect on next start.
+            if (ed.dictation.isListening()) ed.dictation.stop();
+            // Plugin reads config.dictationLang when building a fresh SpeechRecognition —
+            // update it and drop the cached instance by restarting.
+            if (ed.config) ed.config.dictationLang = lang;
+            document.querySelectorAll(".lang-chip").forEach(function (c) { c.classList.toggle("active", c === btn); });
+        });
+    })();
+</script>

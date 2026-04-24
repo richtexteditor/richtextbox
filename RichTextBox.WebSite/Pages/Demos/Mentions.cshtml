@@ -1,0 +1,92 @@
+@page
+@{
+    ViewData["Title"] = "Mentions";
+    ViewData["DemoNumber"] = 152;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Mentions (@@ and #)</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Type <kbd>@@</kbd> to mention a teammate, or <kbd>#</kbd> to tag a topic. A filter-as-you-type picker appears under the caret with async data loading, avatar / subtitle rendering, and atomic insertion &mdash; each mention is a non-editable pill that backspace removes as a single unit. One plugin handles every trigger character.
+                    </p>
+
+                    <richtextbox
+                        id="mentionEditor"
+                        name="mentionEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="320px"
+                        html="<p>Try <b>@@</b> to mention a teammate, or <b>#</b> to tag a topic. Replies in the sidebar stay anchored to the text.</p><p></p>"></richtextbox>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">BYOD (bring-your-own-data)</div>
+                            <p class="demo-note-text">
+                                Pass a Promise-returning <code>source(query)</code> function to <code>editor.mentions.register()</code> and the plugin handles debouncing, the loading state, and the atomic pill insert. Use the same API with a different trigger char (<code>#</code>, <code>[[</code>, anything) to add more pickers &mdash; they all share one implementation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Register an async backend</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>editor.mentions.register({
+    trigger: "@@",
+    source: function (query) {
+        return fetch("/api/users?q=" + encodeURIComponent(query))
+            .then(function (r) { return r.json(); })
+            .then(function (rows) {
+                return rows.map(function (u) {
+                    return { id: u.id, label: u.name, subtitle: u.title, avatarUrl: u.avatar };
+                });
+            });
+    }
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    var USERS = [
+        { id: "alex",   label: "Alex Reyes",     subtitle: "Design lead" },
+        { id: "blair",  label: "Blair Nakamura", subtitle: "Engineering" },
+        { id: "casey",  label: "Casey Moreno",   subtitle: "Product manager" },
+        { id: "devon",  label: "Devon Patel",    subtitle: "Data" },
+        { id: "elena",  label: "Elena Kovacs",   subtitle: "Customer success" },
+        { id: "farid",  label: "Farid Osei",     subtitle: "Partnerships" },
+        { id: "gwen",   label: "Gwen Sato",      subtitle: "QA" },
+        { id: "harper", label: "Harper Lindahl", subtitle: "Brand" }
+    ];
+    var TAGS = [
+        { id: "launch",   label: "launch",   subtitle: "Product launches" },
+        { id: "research", label: "research", subtitle: "Research log" },
+        { id: "incident", label: "incident", subtitle: "Incident reviews" },
+        { id: "hiring",   label: "hiring",   subtitle: "Hiring loop" }
+    ];
+    function staticSource(list) {
+        return function (q) {
+            if (!q) return list.slice(0, 8);
+            var ql = q.toLowerCase();
+            return list.filter(function (u) {
+                return (u.label + " " + (u.subtitle || "")).toLowerCase().indexOf(ql) !== -1;
+            });
+        };
+    }
+    function register() {
+        var editor = window.richTextBoxEditors && window.richTextBoxEditors.mentionEditor;
+        if (!editor || !editor.mentions) { setTimeout(register, 100); return; }
+        editor.mentions.register({ trigger: "@@", source: staticSource(USERS) });
+        editor.mentions.register({ trigger: "#", source: staticSource(TAGS), insertClass: "rte-mention rte-mention-tag" });
+    }
+    register();
+})();
+</script>
+}

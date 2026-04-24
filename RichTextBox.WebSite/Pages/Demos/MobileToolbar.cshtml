@@ -1,0 +1,105 @@
+@page
+@{
+    ViewData["Title"] = "Mobile Toolbar Mode";
+    ViewData["DemoNumber"] = 107;
+}
+<style>
+    .mob-pill { display: inline-flex; align-items: center; background: #ecfccb; color: #3f6212; padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .mob-side {
+        border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; padding: 16px; margin-top: 14px;
+    }
+    .mob-split { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @@media (min-width: 1100px) { .mob-split { grid-template-columns: 380px minmax(0, 1fr); align-items: start; } }
+    .device-frame {
+        border: 10px solid #0f172a; border-radius: 40px; background: #fff;
+        box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.25);
+        width: 360px; max-width: 100%; height: 620px;
+        padding: 14px 10px 22px; overflow: hidden;
+        position: relative; margin: 0 auto;
+    }
+    .device-notch {
+        position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+        width: 120px; height: 18px; background: #0f172a;
+        border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;
+    }
+    .device-inner { height: 100%; overflow-y: auto; padding-top: 10px; }
+    .code-block { margin: 10px 0; padding: 12px 14px; border-radius: 10px; background: #0b1220; color: #e2e8f0; font: 500 12px/1.65 Consolas, "SF Mono", Menlo, monospace; overflow-x: auto; }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .cmt { color: #64748b; font-style: italic; }
+    .checklist li { margin: 4px 0; font-size: 13.5px; color: #475569; }
+    .checklist li::marker { color: #0f8b8d; }
+</style>
+
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    Mobile Toolbar Mode
+                    <span class="mob-pill">New in preview.12</span>
+                </div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Opt-in stylesheet that reshapes the toolbar for phones and tablets. 44&times;44 tap targets,
+                        horizontally-scrolling toolbar, sticky header so the virtual keyboard can't hide it, and
+                        bottom-sheet mounting for dropdowns and dialogs. Enable with one Tag Helper attribute.
+                    </p>
+
+                    <div class="mob-split mt-5">
+                        <div>
+                            <div class="device-frame">
+                                <div class="device-notch"></div>
+                                <div class="device-inner">
+                                    <richtextbox id="MobileEditor"
+                                                 name="Body"
+                                                 toolbar="full"
+                                                 height="520px"
+                                                 enable-mobile-toolbar="true"
+                                                 enable-ai-toolkit="true"
+                                                 enable-slash-commands="true"
+                                                 initial-content="&lt;p&gt;Try me on a phone! The toolbar scrolls horizontally and tap targets are 44&amp;times;44px.&lt;/p&gt;&lt;p&gt;Scroll the toolbar left and right &amp;mdash; all the buttons are there, they just don&amp;rsquo;t wrap.&lt;/p&gt;" />
+                                </div>
+                            </div>
+                            <p class="mt-3 text-center text-xs text-slate-500">Phone-shaped frame for illustration. On an actual device, the sticky toolbar stays visible above the virtual keyboard.</p>
+                        </div>
+
+                        <aside>
+                            <div class="mob-side">
+                                <h3 class="font-['Sora'] text-base font-bold text-slate-900">What changes</h3>
+                                <ul class="checklist mt-2 space-y-1 list-disc pl-5">
+                                    <li><strong>Tap targets</strong>: minimum 44&times;44px, meeting WCAG 2.5.5.</li>
+                                    <li><strong>Toolbar scrolls</strong> horizontally instead of wrapping &mdash; no vertical space lost.</li>
+                                    <li><strong>Sticky toolbar</strong> stays pinned while content scrolls and the virtual keyboard opens.</li>
+                                    <li><strong>Bottom-sheet dropdowns</strong>: font, color, insert menus mount as slide-up sheets that never clip off-screen.</li>
+                                    <li><strong>Full-width dialogs</strong> for link, image, Ask AI &mdash; with 8px safe-area margins.</li>
+                                    <li><strong>Review drawer</strong> (Comments / Track Changes) slides from the bottom instead of the right.</li>
+                                    <li><strong>Floating paragraph toolbar disabled</strong> &mdash; it fought the keyboard on iOS.</li>
+                                    <li><strong>16px content font</strong> so iOS doesn't auto-zoom when a user taps into the editor.</li>
+                                </ul>
+                            </div>
+
+                            <div class="mob-side">
+                                <h3 class="font-['Sora'] text-base font-bold text-slate-900">Enable it</h3>
+<pre class="code-block">&lt;<span class="kw">richtextbox</span> asp-for=<span class="str">"Body"</span> toolbar=<span class="str">"full"</span>
+             enable-mobile-toolbar=<span class="str">"true"</span> /&gt;
+</pre>
+                                <p class="text-xs text-slate-500">Emits <code>&lt;link rel="stylesheet" href="…/rte_mobile.css" /&gt;</code> and adds class <code>rte-mobile</code> to the editor wrapper. Styles are scoped behind a media query so a desktop viewport won't pick them up even if the attribute is accidentally left on in production.</p>
+                            </div>
+
+                            <div class="mob-side">
+                                <h3 class="font-['Sora'] text-base font-bold text-slate-900">Or opt in globally</h3>
+                                <p class="text-xs text-slate-500 mb-2">For a site-wide default (admin apps where every editor is on a phone first):</p>
+<pre class="code-block"><span class="cmt">// _Layout.cshtml, once</span>
+&lt;<span class="kw">link</span> rel=<span class="str">"stylesheet"</span> href=<span class="str">"~/_content/RichTextBox/richtexteditor/rte_mobile.css"</span> /&gt;
+&lt;<span class="kw">body</span> class=<span class="str">"rte-mobile"</span>&gt;
+</pre>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

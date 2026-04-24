@@ -1,0 +1,102 @@
+@page
+@{
+    ViewData["Title"] = "Revision History";
+    ViewData["DemoNumber"] = 155;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Revision History</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Snapshot the document on demand, then browse, preview, diff, and restore any version. Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> (or click the clock icon in the toolbar) to open the browser. Snapshots are stored in <code>localStorage</code> keyed by <code>aiToolkitPersistenceKey</code>; set <code>editor.revisionHistory</code> options or a server endpoint to ship revisions to your backend.
+                    </p>
+
+                    <div class="mb-4 flex flex-wrap items-center gap-3">
+                        <button type="button" id="rhBtnSnap" class="rtb-btn rtb-btn-primary rtb-btn-sm">Save version</button>
+                        <button type="button" id="rhBtnLabelled" class="rtb-btn rtb-btn-outline rtb-btn-sm">Save with label</button>
+                        <button type="button" id="rhBtnOpen" class="rtb-btn rtb-btn-outline rtb-btn-sm">Open history browser</button>
+                        <button type="button" id="rhBtnClear" class="rtb-btn rtb-btn-outline rtb-btn-sm">Clear history</button>
+                    </div>
+
+                    <richtextbox
+                        id="rhEditor"
+                        name="rhEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="320px"
+                        enable-ai-toolkit="true"
+                        ai-toolkit-persistence-key="demo-revision-history"
+                        enable-revision-history="true"
+                        revision-history-max-entries="50"
+                        html="<h2>Proposal draft</h2><p>This is the first version of the proposal. Edit it, click <b>Save version</b>, edit again, save again. Then open the history browser to see what changed and restore any version.</p>"></richtextbox>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">What the browser shows</div>
+                            <p class="demo-note-text">
+                                Chronological list on the left (author + timestamp + label), preview pane on the right with two tabs: <strong>Preview</strong> (sandboxed iframe render of the snapshot) and <strong>Diff vs current</strong> (line-based diff highlighting additions / deletions). Delete and <strong>Restore this version</strong> live in the footer; restore replaces the current document with the chosen snapshot.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">API</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>editor.revisionHistory.snapshot("First draft");
+editor.revisionHistory.list();              // sorted newest-first
+editor.revisionHistory.restore(id);         // prompts to confirm
+editor.revisionHistory.delete(id);
+editor.revisionHistory.openBrowser();
+editor.revisionHistory.closeBrowser();</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Tag helper</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>&lt;richtextbox
+    name="Draft"
+    toolbar="default"
+    enable-revision-history="true"
+    revision-history-max-entries="50"
+    revision-history-auto-snapshot-ms="30000"
+    revision-history-url="/api/revisions" /&gt;</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Or set defaults globally</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>// In the RTE_DefaultConfig block at the top of rte.js:
+RTE_DefaultConfig.revisionHistoryAutoSnapshotMs = 30000;  // snapshot 30s after typing pauses
+RTE_DefaultConfig.revisionHistoryMaxEntries = 50;         // ring-buffer cap
+RTE_DefaultConfig.revisionHistoryUrl = "/api/revisions";  // optional server POST endpoint</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    function wire() {
+        var editor = window.richTextBoxEditors && window.richTextBoxEditors.rhEditor;
+        if (!editor || !editor.revisionHistory) { setTimeout(wire, 100); return; }
+        document.getElementById("rhBtnSnap").addEventListener("click", function () {
+            editor.revisionHistory.snapshot();
+        });
+        document.getElementById("rhBtnLabelled").addEventListener("click", function () {
+            var label = prompt("Label for this version:", "Checkpoint");
+            if (label !== null) editor.revisionHistory.snapshot(label);
+        });
+        document.getElementById("rhBtnOpen").addEventListener("click", function () {
+            editor.revisionHistory.openBrowser();
+        });
+        document.getElementById("rhBtnClear").addEventListener("click", function () {
+            if (confirm("Clear all saved revisions for this demo?")) editor.revisionHistory.clear();
+        });
+    }
+    wire();
+})();
+</script>
+}

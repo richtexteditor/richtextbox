@@ -1,0 +1,265 @@
+@page
+@{
+    ViewData["Title"] = "Built-in AI Provider Resolvers";
+    ViewData["DemoNumber"] = 104;
+}
+<style>
+    .provider-tabs {
+        display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+    }
+    .provider-tab {
+        padding: 8px 14px; border-radius: 999px;
+        border: 1px solid #e2e8f0; background: #fff;
+        font-size: 13px; font-weight: 600; color: #475569;
+        cursor: pointer; transition: all .15s;
+    }
+    .provider-tab:hover { background: #f8fafc; color: #0f172a; }
+    .provider-tab.active {
+        background: #0f172a; color: #fff; border-color: #0f172a;
+    }
+    .code-block {
+        margin: 10px 0; padding: 14px 16px; border-radius: 12px;
+        background: #0b1220; color: #e2e8f0;
+        font: 500 12.5px/1.7 Consolas, "SF Mono", Menlo, monospace;
+        overflow-x: auto;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .cmt { color: #64748b; font-style: italic; }
+    .code-block .fn { color: #7dd3fc; }
+
+    .matrix-table {
+        width: 100%; border-collapse: collapse; margin: 12px 0;
+        font-size: 13px;
+    }
+    .matrix-table th, .matrix-table td {
+        border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left;
+        vertical-align: top;
+    }
+    .matrix-table th { background: #f8fafc; font-weight: 700; color: #0f172a; }
+    .matrix-table code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+
+    .pill {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 3px 10px; border-radius: 999px;
+        background: #ecfccb; color: #3f6212;
+        font-size: 11.5px; font-weight: 600;
+    }
+    .pill-new { background: #dbeafe; color: #1e40af; }
+
+    .callout {
+        margin: 14px 0; padding: 12px 16px; border-radius: 12px;
+        border-left: 4px solid #2563eb;
+        background: linear-gradient(180deg, #eff6ff, #fff);
+        color: #1e3a8a; font-size: 13.5px; line-height: 1.6;
+    }
+    .callout strong { color: #1e3a8a; }
+
+    .provider-panel { display: none; }
+    .provider-panel.active { display: block; }
+</style>
+
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    Built-in AI Provider Resolvers
+                    <span class="pill pill-new">New in v1.0.0-preview.9</span>
+                </div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Three drop-in implementations of <code>IRichTextBoxAiResolver</code> &mdash; OpenAI,
+                        Anthropic (Claude), and Azure OpenAI &mdash; so the AI Toolkit lights up without writing HTTP client
+                        plumbing. One-line DI registration; keys read from your secrets store; no source changes on the
+                        client side.
+                    </p>
+
+                    <div class="callout">
+                        <strong>When to use this vs BYOK.</strong> The <a href="/Demos/AiProviderSettings">BYOK demo</a>
+                        covers the case where <em>tenants</em> each configure their own provider at runtime through an
+                        admin UI. These built-in resolvers cover the more common case: your app picks one provider
+                        globally and reads the key from config at startup.
+                    </div>
+
+                    <h3 class="mt-5 mb-2 text-lg font-bold text-slate-900">Pick a provider</h3>
+                    <div class="provider-tabs" role="tablist">
+                        <button type="button" class="provider-tab active" data-provider="openai">OpenAI</button>
+                        <button type="button" class="provider-tab" data-provider="anthropic">Anthropic</button>
+                        <button type="button" class="provider-tab" data-provider="azure">Azure OpenAI</button>
+                    </div>
+
+                    <div class="provider-panel active" data-provider="openai">
+                        <h4 class="text-base font-bold text-slate-900 mt-3">1. Register the resolver in <code>Program.cs</code></h4>
+<pre class="code-block"><span class="kw">using</span> RichTextBox.AiResolvers;
+
+builder.Services.<span class="fn">AddRichTextBox</span>();
+
+builder.Services.<span class="fn">AddRichTextBoxOpenAiResolver</span>(opts =&gt;
+{
+    opts.ApiKey = builder.Configuration[<span class="str">"OpenAI:ApiKey"</span>];
+    opts.Model  = <span class="str">"gpt-4o-mini"</span>;   <span class="cmt">// optional</span>
+});
+
+builder.Services.<span class="fn">AddControllers</span>();
+<span class="kw">var</span> app = builder.<span class="fn">Build</span>();
+app.<span class="fn">MapRichTextBoxUploads</span>();
+</pre>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">2. Store the key in user-secrets (dev) or Key Vault (prod)</h4>
+<pre class="code-block">dotnet user-secrets set <span class="str">"OpenAI:ApiKey"</span> <span class="str">"sk-..."</span>
+</pre>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">3. Drop the editor into any Razor page</h4>
+<pre class="code-block">&lt;<span class="kw">richtextbox</span> name=<span class="str">"Body"</span> toolbar=<span class="str">"default"</span>
+             enable-ai-toolkit=<span class="str">"true"</span>
+             ai-endpoint=<span class="str">"/api/ai"</span> /&gt;
+</pre>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">That's it</h4>
+                        <p class="text-sm text-slate-600">
+                            Ask AI, AI Chat, and AI Review now call OpenAI through your server.
+                            The browser never sees the key. Every mode (proofread / rewrite / shorten /
+                            translate / summarize / comment / chat) uses the tuned system prompt in
+                            <code>AiResolverPromptTemplates</code>.
+                        </p>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">Works with OpenAI-compatible endpoints too</h4>
+                        <p class="text-sm text-slate-600">Set <code>BaseUrl</code> to target Groq, Together.ai, or a local Ollama instance:</p>
+<pre class="code-block">builder.Services.<span class="fn">AddRichTextBoxOpenAiResolver</span>(opts =&gt;
+{
+    opts.BaseUrl = <span class="str">"http://localhost:11434/v1"</span>;  <span class="cmt">// Ollama</span>
+    opts.Model   = <span class="str">"llama3.2"</span>;
+    opts.ApiKey  = <span class="str">"ollama"</span>;  <span class="cmt">// ignored but required</span>
+});
+</pre>
+                    </div>
+
+                    <div class="provider-panel" data-provider="anthropic">
+                        <h4 class="text-base font-bold text-slate-900 mt-3">1. Register the resolver in <code>Program.cs</code></h4>
+<pre class="code-block"><span class="kw">using</span> RichTextBox.AiResolvers;
+
+builder.Services.<span class="fn">AddRichTextBox</span>();
+
+builder.Services.<span class="fn">AddRichTextBoxAnthropicResolver</span>(opts =&gt;
+{
+    opts.ApiKey = builder.Configuration[<span class="str">"Anthropic:ApiKey"</span>];
+    opts.Model  = <span class="str">"claude-3-5-haiku-latest"</span>;   <span class="cmt">// optional</span>
+});
+</pre>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">2. Store the key</h4>
+<pre class="code-block">dotnet user-secrets set <span class="str">"Anthropic:ApiKey"</span> <span class="str">"sk-ant-..."</span>
+</pre>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">Model options</h4>
+                        <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1 mt-1">
+                            <li><code>claude-3-5-haiku-latest</code> &mdash; fastest, cheapest. Default.</li>
+                            <li><code>claude-sonnet-4-5</code> &mdash; best quality for complex rewrites.</li>
+                            <li><code>claude-opus-4-1</code> &mdash; highest quality, slowest.</li>
+                        </ul>
+                        <p class="mt-3 text-sm text-slate-600">
+                            The resolver handles Anthropic's content-block response format automatically &mdash;
+                            multi-part responses are concatenated in order before being mapped back to the editor's operation contract.
+                        </p>
+                    </div>
+
+                    <div class="provider-panel" data-provider="azure">
+                        <h4 class="text-base font-bold text-slate-900 mt-3">1. Register the resolver in <code>Program.cs</code></h4>
+<pre class="code-block"><span class="kw">using</span> RichTextBox.AiResolvers;
+
+builder.Services.<span class="fn">AddRichTextBox</span>();
+
+builder.Services.<span class="fn">AddRichTextBoxAzureOpenAiResolver</span>(opts =&gt;
+{
+    opts.ApiKey         = builder.Configuration[<span class="str">"AzureOpenAI:ApiKey"</span>];
+    opts.Endpoint       = builder.Configuration[<span class="str">"AzureOpenAI:Endpoint"</span>];
+    opts.DeploymentName = builder.Configuration[<span class="str">"AzureOpenAI:Deployment"</span>];
+});
+</pre>
+
+                        <h4 class="text-base font-bold text-slate-900 mt-3">2. <code>appsettings.json</code> shape</h4>
+<pre class="code-block">{
+  <span class="str">"AzureOpenAI"</span>: {
+    <span class="str">"ApiKey"</span>:     <span class="str">"..."</span>,
+    <span class="str">"Endpoint"</span>:   <span class="str">"https://my-resource.openai.azure.com"</span>,
+    <span class="str">"Deployment"</span>: <span class="str">"gpt-4o-mini-prod"</span>
+  }
+}
+</pre>
+
+                        <div class="callout">
+                            <strong>Deployment, not model.</strong> Azure OpenAI decouples the model from a named
+                            &ldquo;deployment.&rdquo; Put the deployment id in <code>DeploymentName</code> &mdash; not the underlying
+                            model. The deployment decides which model and which region the request hits.
+                        </div>
+                    </div>
+
+                    <h3 class="mt-8 text-lg font-bold text-slate-900">Shared options</h3>
+                    <table class="matrix-table">
+                        <thead>
+                            <tr><th>Option</th><th>Default</th><th>Notes</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ApiKey</code></td><td>(required)</td><td>Never logged, never sent to the browser.</td></tr>
+                            <tr><td><code>Model</code></td><td>provider-specific</td><td><code>gpt-4o-mini</code>, <code>claude-3-5-haiku-latest</code>.</td></tr>
+                            <tr><td><code>BaseUrl</code></td><td>provider default</td><td>Override for proxies or OpenAI-compatible endpoints.</td></tr>
+                            <tr><td><code>MaxTokens</code></td><td>1024</td><td>Generation ceiling.</td></tr>
+                            <tr><td><code>Temperature</code></td><td>0.4</td><td>Balanced default for review-style edits.</td></tr>
+                            <tr><td><code>SystemSuffix</code></td><td><code>null</code></td><td>Appended to the mode-specific system prompt. Useful for brand voice.</td></tr>
+                            <tr><td><code>Timeout</code></td><td>60s</td><td><code>HttpClient.Timeout</code>.</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="mt-5 text-lg font-bold text-slate-900">How modes map to prompts</h3>
+                    <p class="text-sm text-slate-600 mt-1">
+                        All three resolvers route every editor mode through <code>AiResolverPromptTemplates</code>.
+                        Tweak the behaviour for all providers in one place by setting <code>SystemSuffix</code> or by
+                        shipping your own <code>IRichTextBoxAiResolver</code> that wraps one of the built-ins.
+                    </p>
+                    <table class="matrix-table">
+                        <thead>
+                            <tr><th>Editor action</th><th>Mode</th><th>Returns as</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Ask AI &rarr; Proofread</td><td><code>proofread</code></td><td>Preview suggestion over the selection</td></tr>
+                            <tr><td>Ask AI &rarr; Rewrite / Adjust</td><td><code>rewrite</code></td><td>Preview suggestion</td></tr>
+                            <tr><td>Ask AI &rarr; Shorten</td><td><code>shorten</code></td><td>Preview suggestion or document replace</td></tr>
+                            <tr><td>Ask AI &rarr; Expand / Add paragraph</td><td><code>paragraph</code> / <code>expand</code></td><td>Insert below</td></tr>
+                            <tr><td>Ask AI &rarr; Summarize</td><td><code>summarize</code></td><td>Preview suggestion or document replace</td></tr>
+                            <tr><td>Ask AI &rarr; Translate</td><td><code>translate</code></td><td>Preview suggestion (prompt carries target language)</td></tr>
+                            <tr><td>Ask AI &rarr; Add AI comment</td><td><code>comment</code></td><td>Add comment</td></tr>
+                            <tr><td>Ask AI &rarr; Justify edit</td><td><code>justify</code></td><td>Preview suggestion + inline &ldquo;Reason:&rdquo; explanation</td></tr>
+                            <tr><td>AI Chat docked panel</td><td><code>chat</code></td><td>Plain message (no document mutation)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="mt-5 text-lg font-bold text-slate-900">Want to customise without writing a resolver?</h3>
+                    <p class="text-sm text-slate-600 mt-1">Set <code>SystemSuffix</code> &mdash; it's appended after the built-in system prompt, so brand voice / language / tone instructions apply across every mode:</p>
+<pre class="code-block">builder.Services.<span class="fn">AddRichTextBoxAnthropicResolver</span>(opts =&gt;
+{
+    opts.ApiKey = builder.Configuration[<span class="str">"Anthropic:ApiKey"</span>];
+    opts.SystemSuffix = <span class="str">@@"Always use British spelling.
+Reject any request that violates our style guide."</span>;
+});
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var tabs = document.querySelectorAll('.provider-tab');
+        var panels = document.querySelectorAll('.provider-panel');
+        tabs.forEach(function (t) {
+            t.addEventListener('click', function () {
+                var key = t.getAttribute('data-provider');
+                tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+                panels.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-provider') === key); });
+            });
+        });
+    })();
+</script>

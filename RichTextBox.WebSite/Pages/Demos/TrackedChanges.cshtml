@@ -1,0 +1,116 @@
+@page
+@{
+    ViewData["Title"] = "Tracked Changes";
+    ViewData["DemoNumber"] = 153;
+}
+<div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <partial name="Demos/_DemoLayout" />
+        <div>
+            <div class="demo-card">
+                <div class="demo-card-header">Tracked Changes (human suggesting mode)</div>
+                <div class="demo-card-body">
+                    <p class="demo-description">
+                        Word-style suggesting mode for humans. Pick an author, turn on <strong>Suggesting mode</strong>, then type: insertions become underlined spans in the author's color, deletions become strikethrough spans instead of being removed. Every tracked change lands in the shared <code>editor.reviewLedger</code> alongside AI suggestions, so the same drawer can review both.
+                    </p>
+
+                    <div class="mb-4 flex flex-wrap items-center gap-3">
+                        <label class="text-sm font-semibold text-slate-700">Author:
+                            <select id="tcUserSelect" class="ml-2 rounded border border-slate-300 px-2 py-1 text-sm">
+                                <option value="alice">Alice Lee (blue)</option>
+                                <option value="bob">Bob Chen (red)</option>
+                                <option value="chris">Chris Park (green)</option>
+                            </select>
+                        </label>
+                        <button type="button" id="tcBtnToggle" class="rtb-btn rtb-btn-primary rtb-btn-sm">Turn on suggesting mode</button>
+                        <button type="button" id="tcBtnAcceptAll" class="rtb-btn rtb-btn-outline rtb-btn-sm">Accept all mine</button>
+                        <button type="button" id="tcBtnRejectAll" class="rtb-btn rtb-btn-outline rtb-btn-sm">Reject all mine</button>
+                    </div>
+
+                    <richtextbox
+                        id="tcEditor"
+                        name="tcEditor"
+                        toolbar="default"
+                        width="100%"
+                        height="300px"
+                        enable-ai-toolkit="true"
+                        ai-toolkit-persistence-key="demo-tracked-changes"
+                        enable-tracked-changes="true"
+                        current-user-id="alice"
+                        current-user-name="Alice Lee"
+                        current-user-color="#2563eb"
+                        html="<p>The quick brown fox jumps over the lazy dog. Edit this sentence in suggesting mode and watch the marks appear.</p>"></richtextbox>
+
+                    <div class="demo-note mt-5">
+                        <div class="demo-note-content">
+                            <div class="demo-note-title">How this works</div>
+                            <p class="demo-note-text">
+                                The plugin intercepts <code>beforeinput</code> events. In suggesting mode, insertions wrap in <code>&lt;span class="rte-tc-insert"&gt;</code> with the author's color; deletions wrap in <code>&lt;span class="rte-tc-delete"&gt;</code> with strikethrough. Consecutive deletes merge into one span; backspacing inside your own just-typed insert shrinks the insert instead of creating a delete mark. Accept / reject unwraps or removes the span and updates the ledger entry.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">Tag helper</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>&lt;richtextbox
+    name="Draft"
+    toolbar="default"
+    enable-tracked-changes="true"
+    current-user-id="@@User.Identity?.Name"
+    current-user-name="@@User.FindFirst(ClaimTypes.GivenName)?.Value"
+    current-user-color="#2563eb" /&gt;</code></pre>
+                    </div>
+
+                    <h3 class="demo-section-heading mt-5">JavaScript API</h3>
+                    <div class="code-panel mt-3">
+                        <pre><code>editor.trackedChanges.enable({ id: "alice", name: "Alice Lee", color: "#2563eb" });
+editor.trackedChanges.disable();
+editor.trackedChanges.accept(entryId);
+editor.trackedChanges.reject(entryId);
+editor.trackedChanges.acceptAll({ author: "alice" });
+editor.trackedChanges.rejectAll({ author: "alice" });
+editor.trackedChanges.list();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function () {
+    var USERS = {
+        alice: { id: "alice", name: "Alice Lee",  color: "#2563eb" },
+        bob:   { id: "bob",   name: "Bob Chen",   color: "#dc2626" },
+        chris: { id: "chris", name: "Chris Park", color: "#16a34a" }
+    };
+    function wire() {
+        var editor = window.richTextBoxEditors && window.richTextBoxEditors.tcEditor;
+        if (!editor || !editor.trackedChanges) { setTimeout(wire, 100); return; }
+        var userSelect = document.getElementById("tcUserSelect");
+        var btnToggle = document.getElementById("tcBtnToggle");
+        function refresh() {
+            btnToggle.textContent = editor.trackedChanges.isEnabled()
+                ? "Turn off suggesting mode" : "Turn on suggesting mode";
+        }
+        userSelect.addEventListener("change", function () {
+            if (editor.trackedChanges.isEnabled()) editor.trackedChanges.enable(USERS[userSelect.value]);
+        });
+        btnToggle.addEventListener("click", function () {
+            if (editor.trackedChanges.isEnabled()) editor.trackedChanges.disable();
+            else editor.trackedChanges.enable(USERS[userSelect.value]);
+            refresh();
+        });
+        document.getElementById("tcBtnAcceptAll").addEventListener("click", function () {
+            editor.trackedChanges.acceptAll({ author: USERS[userSelect.value].id });
+        });
+        document.getElementById("tcBtnRejectAll").addEventListener("click", function () {
+            editor.trackedChanges.rejectAll({ author: USERS[userSelect.value].id });
+        });
+        refresh();
+    }
+    wire();
+})();
+</script>
+}
